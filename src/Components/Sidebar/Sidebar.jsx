@@ -28,6 +28,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import "./Sidebar.css";
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
   const [opened, setOpened] = useState(null);
@@ -187,7 +188,8 @@ export const Sidebar = () => {
       title: "Authentication",
       icon: <FontAwesomeIcon icon={faPieChart} />,
       drop: [
-        { title: "Login", path: "/login" },
+        { title: "Login", path: "/login"   },
+    
         { title: "Signup", path: "/sign-up" },
       ],
     },
