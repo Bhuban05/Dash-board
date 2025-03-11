@@ -1,0 +1,33 @@
+table {
+    /* margin-left: 270px; */
+    /* border: 0.1px solid black; */
+    overflow-x: scroll;
+    /* margin-right: 50px; */
+    width: 1200px;
+}
+
+th,td {
+    padding: 20px;
+    border-bottom: 0.1px solid black;
+    /* border-right:0 ; */
+}
+
+th {
+    background-color: aliceblue;
+}
+
+#table{
+    margin-left: 300px;
+    width: 76%;
+    overflow-x: scroll;
+    margin-top: 20px;
+}
+
+@media (max-width:950px){
+    #table{
+        margin-left: 20px;
+        width: 95%;
+        overflow-x: scroll;
+        margin-top: 20px;
+    }
+}
