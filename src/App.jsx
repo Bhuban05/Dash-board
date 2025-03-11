@@ -1,16 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import datas from "./data/datas.json";
+
+ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>Hello Bhandu!</h1>
+      <Bar
+        data={{
+          labels: datas.map((data) => data.label),
+          datasets: [
+            {
+              label: "Count of Participants",
+              data: datas.map((data) => data.value),
+              backgroundColor:"rgb(191, 154, 154)",
+            },
+          ],
+        }}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
