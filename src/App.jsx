@@ -1,27 +1,41 @@
-import './App.css';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import datas from "./data/datas.json";
+import './App.css'
 
-ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
+import Reset from './Components/Auth/Reset'
+ //import { Crm } from './Crm/Crm'
+import Dash from './Components/DashBoard/Dash'
+
+
+import { Table } from './Components/Table/Table'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+// import ProtectRoute from './Components/Auth/ProtectRoute'
+
+import Login from './Components/Auth/Login'
+
+import OTP from './Components/Auth/OTP'
+import SignUp from './Components/Auth/Reset'
+
+import Forget from './Components/Auth/Forget'
+import { ToastContainer } from "react-toastify";
+
+
+
 
 function App() {
   return (
     <>
-      <Bar
-        data={{
-          labels: datas.map((data) => data.label),
-          datasets: [
-            {
-              label: "Count of Participants",
-              data: datas.map((data) => data.value),
-              backgroundColor:"rgb(191, 154, 154)",
-            },
-          ],
-        }}
-      />
-    </>
-  );
+      <ToastContainer />
+    <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+            <Route path="/forget" element={<Forget/>} />
+             <Route path="/" element={<Dash/>} />
+             <Route path="/otp" element={<OTP/>} />
+            <Route path="/table" element={<Table />} />
+        </Routes>
+      </BrowserRouter> 
+</>
+   
+  )
 }
 
 export default App;
