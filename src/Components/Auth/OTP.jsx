@@ -60,7 +60,7 @@ function OTP() {
       console.log(email);
       const otpString=otp.join("");
       console.log(otpString)
-      const reponse=await axios.post('http://10.10.10.27:8282/api/v1/college/validate',{otp:otpString,email})
+      const reponse=await axios.post('http://192.168.0.105:8282/api/v1/college/validate',{otp:otpString,email})
       if(reponse.data.statusCode === 200 &&reponse.data.status=== true ){
         toast.success("OTP verified successfully!");
         navigate("/login");
@@ -97,11 +97,11 @@ function OTP() {
             ))}
           </div>
           <p className="text-sm text-center mb-4 text-black">
-            Didn’t receive the OTP? <span className="text-blue-500 cursor-pointer hover:underline" >Resend</span>
+            Didn’t receive the OTP? <span className="text-blue-500    hover:underline  cursor-pointer" >Resend</span>
           </p>
           <button
             onClick={()=>handleLogin(otpValues)}
-            className="rounded-xl w-full md:w-auto px-40 py-2 md:py-3 font-medium text-white bg-blue-600 transition duration-300">
+            className=" cursor-pointer  rounded-xl w-full md:w-auto px-40 py-2 md:py-3 font-medium text-white bg-blue-600 transition duration-300">
             Send
           </button>
           {message && <p className="mt-4 text-center text-sm text-red-500">{message}</p>}
