@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
             
-            <Route path="/SignUp" element={<Reset/>} />
+            <Route path="/sign-up" element={<Reset/>} />
               <Route path="/" element={<Dash/>} />
              <Route path="/otp" element={<OTP/>} />
              <Route path="/forget" element={<Forget/>} />
