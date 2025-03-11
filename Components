@@ -1,0 +1,10 @@
+<script>start("/Users/pembagelusherpa/Desktop/Re-DashBoard/Re-Dash/src/Components/");</script>
+<script>onHasParentDirectory();</script>
+<script>addRow("Auth","Auth",1,448,"448 B",1741084390,"3/4/25, 4:18:10 PM");</script>
+<script>addRow("Crm","Crm",1,128,"128 B",1739792482,"2/17/25, 5:26:22 PM");</script>
+<script>addRow("DashBoard","DashBoard",1,128,"128 B",1740968716,"3/3/25, 8:10:16 AM");</script>
+<script>addRow("Home","Home",1,96,"96 B",1740651857,"2/27/25, 4:09:17 PM");</script>
+<script>addRow("Navbar","Navbar",1,192,"192 B",1740986166,"3/3/25, 1:01:06 PM");</script>
+<script>addRow("Sidebar","Sidebar",1,128,"128 B",1740382771,"2/24/25, 1:24:31 PM");</script>
+<script>addRow("Table","Table",1,128,"128 B",1739792482,"2/17/25, 5:26:22 PM");</script>
+<script>addRow(".DS_Store",".DS_Store",0,6148,"6.0 kB",1741680115,"3/11/25, 1:46:55 PM");</script>
