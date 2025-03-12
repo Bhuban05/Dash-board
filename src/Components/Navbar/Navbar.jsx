@@ -16,16 +16,11 @@ function Navbar() {
     <a className=" items-center space-x-3 ms-8  text-3xl font-bold   text-gray-600">phoenix</a>
 
         <input type="text" placeholder='  Search'  className='border-1 h-8 rounded-2xl w-95 hidden sm:block ' />
-    
-
       <ul className="font-medium flex sm:h-8 md:p-1 m-0 md:p-0;rounded-lg   ">
 
-     <li>
+    <li>
           <a className="block py-2 px-3 "> <FontAwesomeIcon icon={faBell} className='text-gray-500' />  </a>
-
-         
           </li>
-        
         <li>
           <a className="block py-2 px-3" onClick={()=> setVisibal(!visibal)}> <FontAwesomeIcon icon={faBars} className='text-gray-500' />
           </a>
@@ -33,7 +28,7 @@ function Navbar() {
         <li>
           <a className="block py-2 px-3 rounded-sm "> <img
           
-           onClick={()=> setOpen(!open)} src= {pro} className='h-7  sm:p-1 rounded-4xl sm:w-auto' />
+          onClick={()=> setOpen(!open)} src= {pro} className='h-7  sm:p-1 rounded-4xl sm:w-auto' />
 
         {open  && (
           <div className=' bg-white p-5 w-60 rounded-2xl shadow-lg absolute  right-1  top-15  '>
@@ -46,9 +41,8 @@ function Navbar() {
             </ul>
 
           </div>
-               )}
-          
-           </a>
+              )}
+          </a>
           </li>
       </ul>
     </div>
@@ -62,6 +56,7 @@ function Navbar() {
   top: 0, 
   height: "100vh",
   width: "15%",
+  maxWidth:''
     }}>
     {visibal &&(
     <Sidebar/>)
