@@ -1,9 +1,8 @@
 table {
-    /* margin-left: 270px; */
-    /* border: 0.1px solid black; */
-    overflow-x: scroll;
-    /* margin-right: 50px; */
     width: 1200px;
+    overflow-x: scroll;
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 th,td {
@@ -29,5 +28,9 @@ th {
         width: 95%;
         overflow-x: scroll;
         margin-top: 20px;
+    }
+    
+    table{
+        width: 130%;
     }
 }
