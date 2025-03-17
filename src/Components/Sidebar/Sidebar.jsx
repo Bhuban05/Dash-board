@@ -28,6 +28,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import "./Sidebar.css";
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
   const [opened, setOpened] = useState(null);
@@ -187,8 +188,10 @@ export const Sidebar = () => {
       title: "Authentication",
       icon: <FontAwesomeIcon icon={faPieChart} />,
       drop: [
-        { title: "Login", path: "/login" },
-        { title: "Signup", path: "/sign-up" },
+        { title: "Login", path: "/login"   },
+    
+        { title: "SignUp", path: "/sign-up" },
+        { title: "forget", path: "/forget" },
       ],
     },
     {
@@ -271,7 +274,7 @@ export const Sidebar = () => {
                 {item.drop && opened === index && (
                   <div className="dropdown">
                     {item.drop.map((dropItem, dropIndex) => (
-                      <li key={dropIndex}>{dropItem.title}</li>
+                      <Link href={dropItem.path} ><li key={dropIndex}>{dropItem.title}</li></Link>
                     ))}
                   </div>
                 )}
@@ -302,7 +305,7 @@ export const Sidebar = () => {
               {item.drop && opened === index && (
                 <div className="dropdown">
                   {item.drop.map((dropItem, dropIndex) => (
-                    <li key={dropIndex}>{dropItem.title}</li>
+                    <Link to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
                   ))}
                 </div>
               )}
@@ -332,7 +335,7 @@ export const Sidebar = () => {
               {item.drop && opened === index && (
                 <div className="dropdown">
                   {item.drop.map((dropItem, dropIndex) => (
-                    <li key={dropIndex}>{dropItem.title}</li>
+                    <Link to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
                   ))}
                 </div>
               )}
