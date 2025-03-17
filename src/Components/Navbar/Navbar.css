@@ -1,5 +1,5 @@
-/* @media (max-width: 960px){
-    #sideBar{
-        display: none;
+@media (max-width: 960px) {
+    #sideBar {
+      display: none;
     }
-} */
+  }
