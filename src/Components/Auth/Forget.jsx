@@ -12,7 +12,7 @@ function Forget() {
     try {
       
       const response = await axios.post(
-        `http://192.168.0.106:8282/api/v1/auth/forgot-password?email=${email}`
+        `http://192.168.0.109:8282/api/v1/auth/forgot-password?email=${email}`
       );
       
       console.log("Response:", response.data);

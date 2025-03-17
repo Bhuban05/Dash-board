@@ -1,42 +1,40 @@
-import React, { useState, useRef } from 'react';
-import otpImage from '../Auth/otp.jpg';
-import { toast } from "react-toastify";
+import React, { useState, useRef } from "react";
+import otpImage from "../Auth/otp.jpg";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { otpcode } from "../Auth/API";  
 
 function OTP() {
-  const [otpValues, setOtpValues] = useState(Array(6).fill(''));
+  const [otpValues, setOtpValues] = useState(Array(6).fill(""));
   const inputRefs = useRef([]);
-  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [message, setMessage] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (index, value) => {
-    if (isNaN(value)) return;
+    if (isNaN(value)) return; // Only allow numbers
 
     const newOtpValues = [...otpValues];
     newOtpValues[index] = value;
     setOtpValues(newOtpValues);
-    setOtp(newOtpValues.join(''));
+    setOtp(newOtpValues.join("")); 
 
-    // Move focus to the next input
     if (value && index < 5) {
-      inputRefs.current[index + 1].focus();
+      inputRefs.current[index + 1].focus(); 
     }
   };
 
   const handleKeyDown = (index, e) => {
-    if (e.key === 'Backspace' && !otpValues[index] && index > 0) {
-      inputRefs.current[index - 1].focus();
+    if (e.key === "Backspace" && !otpValues[index] && index > 0) {
+      inputRefs.current[index - 1].focus(); 
     }
   };
 
   const handlePaste = (e) => {
     e.preventDefault();
-    const pasteData = e.clipboardData.getData('text').slice(0, 6).replace(/\D/g, '');
-    const newOtpValues = pasteData.split('');
+    const pasteData = e.clipboardData.getData("text").slice(0, 6).replace(/\D/g, "");
+    const newOtpValues = pasteData.split("");
     setOtpValues(newOtpValues);
     setOtp(pasteData);
     newOtpValues.forEach((_, index) => {
@@ -46,29 +44,28 @@ function OTP() {
     });
   };
 
-  const handleLogin = async(otp) => {
-  
-    // if (otp.length === 6) {
-    //   toast.success("OTP verified successfully!");
+  const handleLogin = async () => {
+    if (otp.length !== 6) {
+      toast.error("Please enter the full 6-digit OTP.");
+      return;
+    }
+
+    try {
+      const email = localStorage.getItem("email"); 
+      const otpString = otp; 
+
      
-    // } else {
-    //   setMessage("Please enter the full 6-digit OTP.");
-    //   toast.error("OTP is not complete.");
-    // }
-    try{
-      const email=localStorage.getItem('email');
-      console.log(email);
-      const otpString=otp.join("");
-      console.log(otpString)
-      const reponse=await axios.post('http://192.168.0.105:8282/api/v1/college/validate',{otp:otpString,email})
-      if(reponse.data.statusCode === 200 &&reponse.data.status=== true ){
+      const response = await otpcode({ otp: otpString, email });
+
+      if (response.status === 200 && response.data.status === true) {
         toast.success("OTP verified successfully!");
-        navigate("/login");
-      }else{
-        toast.error("OTP is not complete.");
+        navigate("/login"); 
+      } else {
+        toast.error(response.data.message || "OTP verification failed.");
       }
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred. Please try again.");
     }
   };
 
@@ -97,11 +94,12 @@ function OTP() {
             ))}
           </div>
           <p className="text-sm text-center mb-4 text-black">
-            Didn’t receive the OTP? <span className="text-blue-500    hover:underline  cursor-pointer" >Resend</span>
+            Didn’t receive the OTP? <span className="text-blue-500 hover:underline cursor-pointer">Resend</span>
           </p>
           <button
-            onClick={()=>handleLogin(otpValues)}
-            className=" cursor-pointer  rounded-xl w-full md:w-auto px-40 py-2 md:py-3 font-medium text-white bg-blue-600 transition duration-300">
+            onClick={handleLogin}
+            className="cursor-pointer rounded-xl w-full md:w-auto px-40 py-2 md:py-3 font-medium text-white bg-blue-600 transition duration-300"
+          >
             Send
           </button>
           {message && <p className="mt-4 text-center text-sm text-red-500">{message}</p>}
@@ -110,6 +108,7 @@ function OTP() {
           <img src={otpImage} alt="Verification" className="w-full h-130 object-cover" />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

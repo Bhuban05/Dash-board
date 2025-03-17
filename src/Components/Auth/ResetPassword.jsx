@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import login from "../Auth/login.jpg";
 import { useSearchParams } from "react-router-dom";
+import { resetPassword } from "./API";
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -29,26 +30,24 @@ function ResetPassword() {
       toast.error("Passwords do not match!");
       return;
     }
-
     try {
-      const response = await fetch("http://192.168.0.105:8282/api/v1/auth/reset-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ otp: token, newPassword }),
-      });
+    const response = await resetPassword({
+      otp: token,    
+      newPassword: newPassword,
+    });
+        // body: JSON.stringify({ otp: token, newPassword }),
+      
 
-      const data = await response.json();
+      // const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.message || "Password reset failed. Please check your credentials.");
-      }
+      // if (!response.ok) {
+      //   throw new Error(data.message || "Password reset failed. Please check your credentials.");
+      // }
 
       toast.success("Password reset successfully!");
       navigate("/login");
     } catch (error) {
-      toast.error(error.message);
+       toast.error(error.response.data.message);
     }
   };
 

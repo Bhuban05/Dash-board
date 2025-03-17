@@ -190,7 +190,8 @@ export const Sidebar = () => {
       drop: [
         { title: "Login", path: "/login"   },
     
-        { title: "Signup", path: "/sign-up" },
+        { title: "SignUp", path: "/sign-up" },
+        { title: "forget", path: "/forget" },
       ],
     },
     {
@@ -273,7 +274,7 @@ export const Sidebar = () => {
                 {item.drop && opened === index && (
                   <div className="dropdown">
                     {item.drop.map((dropItem, dropIndex) => (
-                      <li key={dropIndex}>{dropItem.title}</li>
+                      <Link href={dropItem.path} ><li key={dropIndex}>{dropItem.title}</li></Link>
                     ))}
                   </div>
                 )}
@@ -304,7 +305,7 @@ export const Sidebar = () => {
               {item.drop && opened === index && (
                 <div className="dropdown">
                   {item.drop.map((dropItem, dropIndex) => (
-                    <li key={dropIndex}>{dropItem.title}</li>
+                    <Link to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
                   ))}
                 </div>
               )}
@@ -334,7 +335,7 @@ export const Sidebar = () => {
               {item.drop && opened === index && (
                 <div className="dropdown">
                   {item.drop.map((dropItem, dropIndex) => (
-                    <li key={dropIndex}>{dropItem.title}</li>
+                    <Link to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
                   ))}
                 </div>
               )}

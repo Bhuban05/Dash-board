@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
- import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import login from "../Auth/login.jpg";
-import axios from 'axios';
+import log from "../Auth/login.jpg";
+import { Signin } from "../Auth/API.js";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,7 +13,6 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState("");
-
 
   useEffect(() => {
     const savedEmail = localStorage.getItem("rememberedEmail");
@@ -27,29 +26,30 @@ function Login() {
     e.preventDefault();
 
     if (!email || !password) {
-      toast.error("Please fullfill  all fields.");
+      toast.error("Please fullfill  the  fields.");
       return;
     }
 
     try {
-      const response = await fetch("http://192.168.0.105:8282/api/v1/auth/sign-in", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await Signin(
+        { email, password })
+        // {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({email, password}),
+        // };
 
-      const data = await response.json();
+      const data = await response.data
 
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed. Please check your credentials.");
-      }
-
+      // if (!data.ok) {
+      //   throw new Error(data.message || "Login failed. Please check your credentials.");
+      // }
 
       const accessToken = data?.data?.access_token;
       if (accessToken) {
-        localStorage.setItem("accessToken", accessToken); 
+        localStorage.setItem("accessToken", accessToken);
         toast.success("Login successful!");
       } else {
         throw new Error("No access token received.");
@@ -63,24 +63,21 @@ function Login() {
 
       navigate("/");
     } catch (error) {
-      setError(error.message);
-      toast.error(error.message);
+      toast.error(error.response.data.message);
+       setError(error.response.data.message);
     }
   };
 
   return (
     <section className="h-screen flex items-center justify-center">
       <div className="h-130 container px-6 py-2 w-full max-w-4xl bg-white rounded-lg flex flex-wrap">
-   
         <div className="hidden lg:block w-1/2">
-          <img src={login} className="w-full h-full bg-white shadow-blue-200" alt="Login" />
+          <img src={log} className="w-full h-full bg-white shadow-blue-200" alt="Login" />
         </div>
 
-       
         <div className="lg:w-1/2 px-6 bg-white">
           <h2 className="text-2xl font-semibold text-center mb-6 mt-5">Login</h2>
 
-        
           <div className="relative mb-4">
             <div className="relative">
               <input
@@ -97,7 +94,6 @@ function Login() {
             </div>
           </div>
 
-
           <div className="relative">
             <div className="relative">
               <input
@@ -112,18 +108,16 @@ function Login() {
                 Password
               </label>
 
-              
-               <button
+              <button
                 type="button"
                 className="absolute right-3 top-3"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <AiFillEyeInvisible/> : <AiFillEye />}
-              </button>  
+                {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </button>
             </div>
           </div>
 
-        
           <div className="flex justify-between items-center mb-4 mt-4">
             <label className="flex items-center">
               <input
@@ -146,10 +140,9 @@ function Login() {
             Sign in
           </button>
 
-        
           <p className="text-center mt-4">
             Don’t have an account?{" "}
-            <Link to="/signup" className="text-blue-500">
+            <Link to="/sign-up" className="text-blue-500">
               Sign up
             </Link>
           </p>
