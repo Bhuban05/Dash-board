@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import man from "../Auth/man.png";
-// import AuthUser from "./AuthUser";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import sig from "../Auth/sig.jpg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Signup } from "../Auth/API.js";
 
 function Reset() {
-  //  const { http } = AuthUser();
   const navigate = useNavigate();
 
+  // State variables for form fields
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
+  const [collegePhone, setCollegePhone] = useState("");
+  const [levels, setLevels] = useState("");
   const [file, setFile] = useState(null);
   const [previewURL, setPreviewURL] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -23,6 +25,7 @@ function Reset() {
     };
   }, [previewURL]);
 
+  
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
@@ -34,55 +37,61 @@ function Reset() {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    if (!name || !address || !email || !file) {
-      toast.error("please fillfull the all inputs");
-      
+    
+    if (!name || !address || !email || !file || !collegePhone || !levels) {
+      toast.error("Please fill in all fields.");
       return;
     }
 
-  const formData = new FormData();
+   
+    const formData = new FormData();
     formData.append("collegeName", name);
     formData.append("collegeAddress", address);
     formData.append("adminEmail", email);
     formData.append("collegePAN", file);
+    formData.append("collegePhone", collegePhone);
+    formData.append("levels", levels);
 
     try {
-      const response = await fetch("http://10.10.10.27:8282/api/v1/college/request", {
-        body: formData,
-        method: "POST",
-      });
-          
-      const data = await response.json();
+     
+      const response = await Signup(formData); 
+      const data = await response.data;
 
-      console.log("Success:", data);
-    
-    
-      if (!data.status) {
-        toast.error(data.error?.details);
-      } else {
-        localStorage.setItem("email", email)
-        navigate("/OTP");
-      }      
+     
+      // if (!response.ok) {
+      //   throw new Error(data.message || "Signup failed. Please check your inputs.");
+      // }
+
+      localStorage.setItem("email", email);
+      navigate("/OTP");
     } catch (error) {
-      console.error("Error submitting form:", error);
-      const errorMessage = error.message || "An error occurred";
-      toast.error(errorMessage);
+      // console.error("Error submitting form:", error);
+      toast.error(error.response.data.message);
     }
   };
 
   return (
     <section className="h-screen flex items-center justify-center">
       <div className="container px-6 py-2 w-full max-w-4xl flex flex-wrap bg-white rounded-2xl">
+       
         <div className="hidden lg:block w-1/2 rounded-2xl overflow-hidden">
-          <img src={man} alt="Man" className="h-full w-full" />
+          <img 
+            src={sig} 
+            alt="Man" 
+            className="h-full w-full object-cover" 
+          />
         </div>
 
+        
         <div className="w-full lg:w-1/2 px-6">
           <h2 className="text-2xl font-semibold text-center mb-6">Sign Up</h2>
 
+         
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
+      
           <form onSubmit={submitForm}>
+
             <div className="mb-4">
               <input
                 type="text"
@@ -103,6 +112,7 @@ function Reset() {
               />
             </div>
 
+
             <div className="mb-4">
               <input
                 type="email"
@@ -113,6 +123,32 @@ function Reset() {
               />
             </div>
 
+
+            <div className="mb-4">
+              {/* <PhoneInput
+                defaultCountry="NP"
+                placeholder="Phone number"
+                className="w-full p-2 border border-gray-300 rounded mt-1"
+                value={collegePhone}
+                onChange={setCollegePhone}
+              /> */}
+            </div>
+
+            <div className="mb-4">
+              <select
+                className="w-full p-2 border border-gray-300 rounded mt-4"
+                value={levels}
+                onChange={(e) => setLevels(e.target.value)}
+              >
+                <option value="">Select Level</option>
+                <option value="BCA">BCA</option>
+                <option value="BBA">BBA</option>
+                <option value="CSIT">CSIT</option>
+                <option value="BBS">BBS</option>
+              </select>
+            </div>
+
+          
             <div className="mb-4">
               <label className="block text-xl font-semibold text-gray-700 mb-2">
                 Upload College PAN (Image)
@@ -153,7 +189,6 @@ function Reset() {
                 I agree to the <span className="text-blue-500">terms of use</span>
               </p>
             </div>
-
             <button
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 cursor-pointer transition"
@@ -163,6 +198,7 @@ function Reset() {
           </form>
         </div>
       </div>
+      <ToastContainer /> 
     </section>
   );
 }

@@ -31,6 +31,7 @@ import {
 import { useState } from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
+import College from "../Colleges/College";
 
 export const Sidebar = () => {
   const [opened, setOpened] = useState(null);
@@ -195,8 +196,10 @@ export const Sidebar = () => {
       title: "Authentication",
       icon: <FontAwesomeIcon icon={faPieChart} />,
       drop: [
-        { title: "Login", path: "/login" },
-        { title: "Signup", path: "/sign-up" },
+        { title: "Login", path: "/login"   },
+    
+        { title: "SignUp", path: "/sign-up" },
+        { title: "forget", path: "/forget" },
       ],
     },
     {
@@ -216,7 +219,7 @@ export const Sidebar = () => {
                 onClick={() => item.drop && toggle(index)}
                 >
                 <div>
-                  <span className="icon">{item.icon}</span> {item.title}
+                  <Link to={item.path}><span className="icon">{item.icon}</span> {item.title}</Link>
                 </div>
                 <div className="dropIcon">
                   {opened === index ? (
@@ -235,7 +238,7 @@ export const Sidebar = () => {
                 {item.drop && opened === index && (
                   <div className="dropdown">
                     {item.drop.map((dropItem, dropIndex) => (
-                      <Link href={dropItem.path} ><li key={dropIndex}>{dropItem.title}</li></Link>
+                      <Link key={dropIndex} to={dropItem.path} ><li key={dropIndex}>{dropItem.title}</li></Link>
                     ))}
                   </div>
                 )}
@@ -266,7 +269,7 @@ export const Sidebar = () => {
               {item.drop && opened === index && (
                 <div className="dropdown">
                   {item.drop.map((dropItem, dropIndex) => (
-                    <Link to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
+                    <Link key={dropIndex} to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
                   ))}
                 </div>
               )}

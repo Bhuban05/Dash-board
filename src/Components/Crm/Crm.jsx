@@ -50,19 +50,19 @@ export const data = {
     {
       label: 'Dataset 1',
       data: labels.map(() => faker.number.int({ min: 0, max: 150 })),
-      backgroundColor: 'rgba(255, 99, 132, 1)',
+      backgroundColor: 'rgba(175, 32, 63, 0.5)',
       fill:'false',
       tension:0.4,
-      borderColor:'rgba(255,172,130,1)'
+      borderColor:'rgb(211, 83, 19)'
     },
     {
       label: 'Dataset 2',
       data: labels.map(() => faker.number.int({ min: 0, max: 200 })),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      backgroundColor: 'rgba(18, 143, 226, 0.5)',
       fill:'true',
       tension:0.4,
       borderWidth: 2,
-      borderColor: 'rgba(53, 162, 235, 0.5)',
+      borderColor: 'rgba(14, 71, 109, 0.5)',
     },
   ],
 };

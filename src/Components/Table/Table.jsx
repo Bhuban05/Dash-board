@@ -3,6 +3,8 @@ import "./Table.css"
 const Table = ({ columns, data }) => {
   return (
     <div id="table">
+      <label className="w-full items-end">Search 
+      <input type="text" className="border-2 rounded-md" /></label>
     <table border="1">
       <thead>
         <tr>
