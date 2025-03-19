@@ -17,12 +17,8 @@ import SignUp from './Components/Auth/Reset'
 import Forget from './Components/Auth/Forget'
 import { ToastContainer } from "react-toastify";
 import ResetPassword from './Components/Auth/resetPassword'
+
 import StudentId from './Components/Table/StudentId'
-
-
-
-
-
 
 function App() {
   return (
@@ -36,7 +32,8 @@ function App() {
             <Route path="/" element={<Dash/>} />
             <Route path="/otp" element={<OTP/>} />
             <Route path="/forget" element={<Forget/>} />
-            {/* <Route path="/table" element={<Table />} /> */}
+           
+           
             <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>
       </BrowserRouter> 

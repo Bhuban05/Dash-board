@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import sig from "../Auth/sig.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+// import "react-phone-number-input/style.css";
+// import PhoneInput from "react-phone-number-input";
 import { Signup } from "../Auth/API.js";
 
 function Reset() {

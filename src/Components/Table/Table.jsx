@@ -2,6 +2,7 @@ import "./Table.css"
 
 const Table = ({ columns, data }) => {
   return (
+    <div id="table">
     <table border="1">
       <thead>
         <tr>
@@ -20,6 +21,7 @@ const Table = ({ columns, data }) => {
         ))}
       </tbody>
     </table>
+    </div>
   );
 };
 

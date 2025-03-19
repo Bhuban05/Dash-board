@@ -33,19 +33,8 @@ function Login() {
     try {
       const response = await Signin(
         { email, password })
-        // {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({email, password}),
-        // };
-
+     
       const data = await response.data
-
-      // if (!data.ok) {
-      //   throw new Error(data.message || "Login failed. Please check your credentials.");
-      // }
 
       const accessToken = data?.data?.access_token;
       if (accessToken) {
