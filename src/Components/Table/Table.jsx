@@ -1,6 +1,6 @@
 import "./Table.css"
 
-const Table = ({ columns, data }) => {
+const Table = ({ columns=[], data=[] }) => {
   return (
     <div id="table">
       <label className="w-full items-end">Search 

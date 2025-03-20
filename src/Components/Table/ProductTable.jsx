@@ -12,7 +12,7 @@ const ProductTable = () => {
     
     <div>
       <h2>Product Table</h2>
-      <Table columns={columns} data={Datas} />
+      {/* <Table columns={columns} data={Datas} /> */}
     </div>
   );
 };
