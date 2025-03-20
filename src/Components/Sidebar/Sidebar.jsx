@@ -25,10 +25,13 @@ import {
   faGreaterThan,
   faSortDown,
   faLessThan,
+  faBuilding,
+  faBuildingFlag,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
+import College from "../Colleges/College";
 
 export const Sidebar = () => {
   const [opened, setOpened] = useState(null);
@@ -64,11 +67,16 @@ export const Sidebar = () => {
       ],
     },
     {
+      title: "Colleges",
+      icon: <FontAwesomeIcon icon={faBuildingFlag} />,
+      path: "/colleges",
+    },
+    {
       title: "CRM",
       path: "/crm",
       icon: <FontAwesomeIcon icon={faPhone} />,
       drop: [
-        { title: "Ecommerce", path: "/ecommerce" },
+        { title: "College", path: "/ecommerce" },
         { title: "CRM", path: "/crm" },
         { title: "Project Management", path: "/project_management" },
         { title: "Social", path: "/social" },
@@ -200,50 +208,6 @@ export const Sidebar = () => {
       icon: <FontAwesomeIcon icon={faPieChart} />,
     },
   ];
-
-  const sideItem3 = [
-    {
-      title: "Forms",
-      path: "/forms",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-    {
-      title: "Icons",
-      path: "/icons",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-    {
-      title: "Tables",
-      path: "/tables",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-    {
-      title: "Echarts",
-      path: "/echarts",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-    {
-      title: "Components",
-      path: "/components",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-    {
-      title: "Utilities",
-      path: "/utilities",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-    {
-      title: "Widgets",
-      path: "/widgets",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-    {
-      title: "Multi Level",
-      path: "/multi-level",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-  ];
-
   return (
     <div id="side">
       <div id="Sidebar">
@@ -255,7 +219,7 @@ export const Sidebar = () => {
                 onClick={() => item.drop && toggle(index)}
                 >
                 <div>
-                  <span className="icon">{item.icon}</span> {item.title}
+                  <Link to={item.path}><span className="icon">{item.icon}</span> {item.title}</Link>
                 </div>
                 <div className="dropIcon">
                   {opened === index ? (
@@ -274,7 +238,7 @@ export const Sidebar = () => {
                 {item.drop && opened === index && (
                   <div className="dropdown">
                     {item.drop.map((dropItem, dropIndex) => (
-                      <Link href={dropItem.path} ><li key={dropIndex}>{dropItem.title}</li></Link>
+                      <Link key={dropIndex} to={dropItem.path} ><li key={dropIndex}>{dropItem.title}</li></Link>
                     ))}
                   </div>
                 )}
@@ -305,37 +269,7 @@ export const Sidebar = () => {
               {item.drop && opened === index && (
                 <div className="dropdown">
                   {item.drop.map((dropItem, dropIndex) => (
-                    <Link to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </ul>
-
-        <ul>
-          <span id="spanSidebar">Module</span>
-          {sideItem3.map((item, index) => (
-            <div key={index} className="sideItem">
-              <div
-                className="sidebar-item"
-                onClick={() => item.drop && toggle(index)}
-              >
-                <div>
-                  <span className="icon">{item.icon}</span> {item.title}
-                </div>
-                <div className="dropIcon">
-                {opened === index ? (
-                    <FontAwesomeIcon id="arrowDown" icon={faSortDown} />
-                  ) : (
-                    <FontAwesomeIcon id="arrow" icon={faSortDown} />
-                  )}
-                </div>
-              </div>
-              {item.drop && opened === index && (
-                <div className="dropdown">
-                  {item.drop.map((dropItem, dropIndex) => (
-                    <Link to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
+                    <Link key={dropIndex} to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
                   ))}
                 </div>
               )}

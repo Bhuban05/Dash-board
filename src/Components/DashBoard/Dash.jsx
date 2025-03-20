@@ -6,6 +6,8 @@ import {Crm} from "../Crm/Crm"
 import Table from "../Table/Table"
 import "./Dash.css"
 import Navbar from '../Navbar/Navbar'
+import ProductTable from '../Table/ProductTable'
+import StudentId from '../Table/StudentId'
 //  import Sidebar from "../Sidebar/Sidebar"
 
 function Dash() {
@@ -30,7 +32,8 @@ function Dash() {
             </div>
             <div>
             <Crm/>
-            <Table/>
+            {/* <ProductTable/> */}
+            <StudentId/>
             </div>
 </div>
 </div>

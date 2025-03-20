@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import sig from "../Auth/sig.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
 import { Signup } from "../Auth/API.js";
 
 function Reset() {
@@ -127,13 +125,13 @@ function Reset() {
 
 
             <div className="mb-4">
-              <PhoneInput
+              {/* <PhoneInput
                 defaultCountry="NP"
                 placeholder="Phone number"
                 className="w-full p-2 border border-gray-300 rounded mt-1"
                 value={collegePhone}
                 onChange={setCollegePhone}
-              />
+              /> */}
             </div>
 
             <div className="mb-4">
@@ -191,8 +189,6 @@ function Reset() {
                 I agree to the <span className="text-blue-500">terms of use</span>
               </p>
             </div>
-
-           
             <button
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 cursor-pointer transition"

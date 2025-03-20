@@ -1,9 +1,8 @@
 table {
-    /* margin-left: 270px; */
-    /* border: 0.1px solid black; */
-    overflow-x: scroll;
-    /* margin-right: 50px; */
     width: 1200px;
+    margin-bottom: 50px;
+    text-align: center;
+    overflow-x: scroll;
 }
 
 th,td {
@@ -16,18 +15,39 @@ th {
     background-color: aliceblue;
 }
 
+#filter-search{
+    margin-right:10px ;
+    font-size: 16px;
+}
+
+#filter{
+    margin-left: 300px;
+    width: 76%;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    /* background-color: aliceblue; */
+}
+
+#filter input{
+    padding: 5px;
+    height: 27px;
+}
+
 #table{
     margin-left: 300px;
     width: 76%;
-    overflow-x: scroll;
-    margin-top: 20px;
+    overflow: scroll;
+    /* margin-top: 20px; */
 }
 
 @media (max-width:950px){
     #table{
         margin-left: 20px;
         width: 95%;
-        overflow-x: scroll;
-        margin-top: 20px;
+    }
+    
+    table{
+        width: 130%;
     }
 }

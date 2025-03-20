@@ -1,57 +1,50 @@
 import "./Table.css"
+import { useState } from "react";
 
-export const Table = () => {
-    return(<>
-    <div id="table"  >
-    <table>
-  <thead>
-    <tr>
-      <th>Song</th>
-      <th>Artist</th>
-      <th>Year</th>
-      <th>Review</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-      <td>Malcolm Lockyer</td>
-      <td>1961</td>
-      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores necessitatibus ullam sit deleniti possimus perspiciatis totam quae ipsa pariatur!</td>
-      <td>Lorem ipsum dolor sit amet.</td>
-    </tr>
-    <tr>
-      <td>Witchy Woman</td>
-      <td>The Eagles</td>
-      <td>1972</td>
-      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, mollitia asperiores voluptatem sapiente ex neque?</td>
-      <td>Lorem ipsum dolor sit, amet consectetur adipisicing.</td>
-    </tr>
-    <tr>
-      <td>Shining Star</td>
-      <td>Earth, Wind, and Fire</td>
-      <td>1975</td>
-      <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde alias cumque veritatis nobis a beatae, delectus iste repellat iure illo, maiores accusantium debitis vero. Molestias!</td>
-      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, non?</td>
-    </tr>
-    <tr>
-      <td>Shining Star</td>
-      <td>Earth, Wind, and Fire</td>
-      <td>1975</td>
-      <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde alias cumque veritatis nobis a beatae, delectus iste repellat iure illo, maiores accusantium debitis vero. Molestias!</td>
-      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, non?</td>
-    </tr>
-    <tr>
-      <td>Shining Star</td>
-      <td>Earth, Wind, and Fire</td>
-      <td>1975</td>
-      <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde alias cumque veritatis nobis a beatae, delectus iste repellat iure illo, maiores accusantium debitis vero. Molestias!</td>
-      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, non?</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-    </>);
-};
-export default Table
+const Table = ({ columns, data }) => {
+  const [search,setSearch] = useState("");
+
+  const filterData = data.filter(datas=>
+    datas.Name.toLowerCase().includes(search.toLowerCase()) ||
+    datas.Course.toLowerCase().includes(search.toLowerCase())
+  )
+
+  return (
+    <div>
+      <div id="filter">
+      <label className="mr-0.5" id="filter-search">Search </label>
+      <input type="text" className="border-2 rounded-md" 
+      value={search}
+      placeholder="Search Name or course"
+      onChange={(e)=> setSearch(e.target.value)}
+      />
+      </div>
+    <div id="table">
+    <table border="1">
+      <thead>
+        <tr>
+
+          {columns.map((col) => (
+            <th key={col}>{col}</th>
+          ))}
+
+        </tr>
+      </thead>
+      <tbody>
+
+        {filterData.map((row, index) => (
+          <tr key={index}>
+            {columns.map((col) => (
+              <td key={col}>{row[col]}</td>
+            ))}
+          </tr>
+        ))}
+
+      </tbody>
+    </table>
+    </div>
+    </div>
+  );
+}
+
+export default Table;
