@@ -3,10 +3,10 @@ import './Dash.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPause, faStar } from '@fortawesome/free-solid-svg-icons'
 import {Crm} from "../Crm/Crm"
-// import Table from "../Table/Table"
+
 import "./Dash.css"
 import Navbar from '../Navbar/Navbar'
-// import ProductTable from '../Table/ProductTable'
+import ProductTable from '../Table/ProductTable'
 import StudentId from '../Table/StudentId'
 //  import Sidebar from "../Sidebar/Sidebar"
 
@@ -32,8 +32,9 @@ function Dash() {
             </div>
             <div>
             <Crm/>
-            {/* <ProductTable/> */}
+            <ProductTable/>
             <StudentId/>
+           
             </div>
 </div>
 </div>
