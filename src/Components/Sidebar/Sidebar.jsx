@@ -36,6 +36,7 @@ export const Sidebar = () => {
     { title: "Home", icon: faPieChart, path: "/home" },
     { title: "Ecommerce", icon: faCartShopping, path: "/ecommerce" },
     { title: "Colleges", icon: faBuildingFlag, path: "/colleges" },
+    { title: "board-management", icon: faBuildingFlag, path: "/board-management" },
     { title: "CRM", icon: faPhone, path: "/crm" },
     { title: "Project Management", icon: faFile, path: "/project_management" },
     { title: "Travel Agency", icon: faSuitcase, path: "/travel_agency" },

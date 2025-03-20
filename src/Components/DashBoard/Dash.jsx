@@ -32,7 +32,7 @@ function Dash() {
             </div>
             <div>
             <Crm/>
-            <ProductTable/>
+            {/* <ProductTable/> */}
             <StudentId/>
            
             </div>
