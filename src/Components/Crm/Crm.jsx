@@ -50,7 +50,11 @@ export const data = {
     {
       label: 'Dataset 1',
       data: labels.map(() => faker.number.int({ min: 0, max: 150 })),
+
       backgroundColor: 'rgba(175, 32, 63, 0.5)',
+
+      backgroundColor: 'rgba(255, 99, 132, 1)',
+
       fill:'false',
       tension:0.4,
       borderColor:'rgb(211, 83, 19)'
