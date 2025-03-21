@@ -18,7 +18,7 @@ function ResetPassword() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
 
-  console.log("Token:", token);;
+  console.log("Token:", token);
 
   const handleLogin = async (e) => {
     e.preventDefault();

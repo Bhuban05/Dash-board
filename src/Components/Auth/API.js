@@ -23,7 +23,14 @@ export const forget = () => API.post(API_ENDPOINTS.FORGET);
 export const otpcode = (formData) => API.post(API_ENDPOINTS.OTP, formData);
 export const resetPassword = () => API.post(API_ENDPOINTS.RESETPASSWORD);
 export const college = (formData) => API.get(API_ENDPOINTS.COLLEGE, formData);
-
+export const board = (token, data) => {
+  return API.post(API_ENDPOINTS.BOARD, data, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+      },
+  });
+};
 
 export default API;
 

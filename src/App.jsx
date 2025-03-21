@@ -18,6 +18,9 @@ import Forget from './Components/Auth/Forget'
 import { ToastContainer } from "react-toastify";
 import ResetPassword from './Components/Auth/resetPassword'
 import Table from './Components/Table/Table'
+import Course from './Components/Education-management/Course/Course'
+import Board from './Components/Education-management/Board/Board'
+
 
 function App() {
   return (
@@ -32,6 +35,8 @@ function App() {
             <Route path="/otp" element={<OTP/>} />
             <Route path="/forget" element={<Forget/>} />
             <Route path="/table" element={<Table/>} />
+            <Route path="/course" element={<Course/>} />
+            <Route path="/board" element={<Board/>} />
             
            <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>
