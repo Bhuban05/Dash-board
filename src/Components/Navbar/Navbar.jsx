@@ -4,11 +4,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import pro from './pro.jpg'  
 import Sidebar from '../Sidebar/Sidebar'
 import "./Navbar.css"
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   const[open, setOpen] = useState(false)
-  const[visibal, setVisibal] = useState(true)
-    const Menus = ["profile","help centre", "post activity", "setting", "your apps", "Signout"];
+  const[visibal, setVisibal] = useState(true) 
+    const Menus = [
+      {
+        name: "Profile",
+        path: "/profile",
+      },
+      {
+        name: "Help Center",
+        path: "/help-center",
+      },
+      {
+        name: "Post Activity",
+        path: "/post-activity",
+      },
+      {
+        name: "Setting",
+        path: "/setting",
+      },
+      {
+        name: "Your Apps",
+        path: "/your-apps",
+      },
+      {
+        name: "Add account",
+        path: "/sign-up",
+      },
+      {
+        name: "Log-out",
+        path: "/login",
+      }
+    ];
   return (
     <>
     <nav className=" border-y-1 bg-gray-200  w-full top-0 fixed">
@@ -35,8 +65,9 @@ function Navbar() {
 
             <ul>
               {
-                  Menus.map((menu)=>(
-                    <li className='   p-2 text-lg cursor-pointer rounded hover:bg-gray-500 -mt-0.5 mr-1.1 border-t-2px solid ' key={menu}>{menu}</li>
+                  Menus.map((menu,index)=>(
+                    <Link key={index} to={menu.path}>
+                    <li className='   p-2 text-lg cursor-pointer rounded hover:bg-gray-500 -mt-0.5 mr-1.1 border-t-2px solid '>{menu.name}</li></Link>
                   ))}
             </ul>
 

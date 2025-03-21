@@ -1,7 +1,6 @@
 import Table from "./Table";
 
 export default function StudentId(){
-    const columns = ["Id", "Name", "Course","Age"];
     const data = [
         { Id: "101", Name: "Amit", Course: "BBA", Age: "21" },
         { Id: "102", Name: "Rahul", Course: "BCA", Age: "22" },
@@ -25,6 +24,6 @@ export default function StudentId(){
         { Id: "120", Name: "Tanvi", Course: "BCA", Age: "22" }
 ];
 return<>
-    <Table columns={columns} data={data}/>
+    <Table data={data}/>
     </>
 }
