@@ -7,6 +7,7 @@ const API_ENDPOINTS = {
   OTP: `/college/validate`,
   RESETPASSWORD: `/auth/reset-password`, 
   COLLEGE: `/college/get-all`, 
+  BOARD: `/board`, 
   
 }
 

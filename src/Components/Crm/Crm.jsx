@@ -84,14 +84,6 @@ export const Crm = () => {
           <Line options={options} data={data} />
           </div>
           </div>
-          <div id="inner-container2">
-          <div id="yoo3">
-          <Doughnut options={options} data={data} />
-          </div>
-          <div id="yoo4">
-          <Bar options={options} data={data} />
-          </div>
-          </div>
       </div>
     </>
   );

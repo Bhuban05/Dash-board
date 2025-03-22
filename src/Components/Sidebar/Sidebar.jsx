@@ -65,10 +65,29 @@ export const Sidebar = () => {
         { title: "Travel Agency", path: "/travel_agency" },
       ],
     },
-    {
-      title: "Colleges",
-      icon: <FontAwesomeIcon icon={faBuildingFlag} />,
+   
+{
+      title: "Education",
+      icon: <FontAwesomeIcon icon={faPieChart} />,
+      drop: [
+        { title: "Board", path: "/Board"   },
+    
+        { title: "Course", path: "/Course" },
+      ],
     },
+
+    {
+      title: "Authentication",
+      icon: <FontAwesomeIcon icon={faPieChart} />,
+      drop: [
+        { title: "Login", path: "/login"   },
+    
+        { title: "SignUp", path: "/sign-up" },
+        { title: "forget", path: "/forget" },
+      ],
+    },
+  
+
     {
       title: "CRM",
       icon: <FontAwesomeIcon icon={faPhone} />,
@@ -80,6 +99,7 @@ export const Sidebar = () => {
         { title: "Travel Agency", path: "/travel_agency" },
       ],
     },
+   
     {
       title: "Project Management",
       icon: <FontAwesomeIcon icon={faFile} />,
@@ -172,20 +192,12 @@ export const Sidebar = () => {
       title: "Errors",
       icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
     },
-    {
-      title: "Authentication",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-      drop: [
-        { title: "Login", path: "/login"   },
-    
-        { title: "SignUp", path: "/sign-up" },
-        { title: "forget", path: "/forget" },
-      ],
-    },
+   
     {
       title: "Layouts",
       icon: <FontAwesomeIcon icon={faPieChart} />,
     },
+   
   ];
   return (
     <div id="side">

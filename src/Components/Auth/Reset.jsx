@@ -38,10 +38,10 @@ function Reset() {
     e.preventDefault();
 
     
-    if (!name || !address || !email || !file || !collegePhone || !levels) {
-      toast.error("Please fill in all fields.");
-      return;
-    }
+    // if (!name || !address || !email || !file || !collegePhone || !levels) {
+    //   toast.error("Please fill in all fields.");
+    //   return;
+    // }
 
    
     const formData = new FormData();
