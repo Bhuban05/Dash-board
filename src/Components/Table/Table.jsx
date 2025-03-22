@@ -3,12 +3,14 @@ import { useState } from "react";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   const [search, setSearch] = useState(""); // Filtering useState
+
   const [currentPage, setCurrentPage] = useState(1); // Pagination useState
+
   const [daata, setDaata] = useState([...data]); // Sorting useState
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
 
-  // Filtering logic
+  // filtering logic
   let filterData = [];
   try {
     if (!Array.isArray(data)) throw new Error("Invalid data format. Expected an array.");
@@ -28,12 +30,12 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     filterData = [];
   }
 
-  // Pagination logic
+  // pagination logic
   const totalPages = Math.ceil(filterData.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const paginatedData = filterData.slice(startIndex, startIndex + rowsPerPage);
 
-  // Sorting function
+  // sorting function
   const handleSort = (field) => {
     let newDirection = "asc";
     if (sortField === field && direction === "asc") {
@@ -52,7 +54,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   };
 
   return (
-    <div>
+    <div id="container-table">
       <div id="filter">
         <label className="mr-0.5" id="filter-search">Search </label>
         <input
@@ -93,6 +95,9 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
               </tbody>
             </table>
 
+          </>
+        )}
+      </div>
             <div className="pagination">
               <button
                 id="pagination-btn"
@@ -114,9 +119,6 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
                 Next
               </button>
             </div>
-          </>
-        )}
-      </div>
     </div>
   );
 };
