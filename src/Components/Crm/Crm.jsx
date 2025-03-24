@@ -50,7 +50,11 @@ export const data = {
     {
       label: 'Dataset 1',
       data: labels.map(() => faker.number.int({ min: 0, max: 150 })),
+
       backgroundColor: 'rgba(175, 32, 63, 0.5)',
+
+      backgroundColor: 'rgba(255, 99, 132, 1)',
+
       fill:'false',
       tension:0.4,
       borderColor:'rgb(211, 83, 19)'
@@ -78,14 +82,6 @@ export const Crm = () => {
           </div>
           <div id="yoo2">
           <Line options={options} data={data} />
-          </div>
-          </div>
-          <div id="inner-container2">
-          <div id="yoo3">
-          <Doughnut options={options} data={data} />
-          </div>
-          <div id="yoo4">
-          <Bar options={options} data={data} />
           </div>
           </div>
       </div>

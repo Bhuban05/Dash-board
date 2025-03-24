@@ -6,6 +6,9 @@ const API_ENDPOINTS = {
   FORGET: `/auth/forgot-password`,
   OTP: `/college/validate`,
   RESETPASSWORD: `/auth/reset-password`, 
-};
+  COLLEGE: `/college/get-all`, 
+  BOARD: `/board`, 
+  
+}
 
 export default API_ENDPOINTS;

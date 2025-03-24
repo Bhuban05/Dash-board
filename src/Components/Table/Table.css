@@ -1,53 +1,96 @@
-table {
-    width: 1200px;
-    margin-bottom: 50px;
-    text-align: center;
-    overflow-x: scroll;
+#container-table{
+    margin-left: 300px;
 }
 
-th,td {
-    padding: 20px;
-    border-bottom: 0.1px solid black;
-    /* border-right:0 ; */
+table {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
 }
 
 th {
-    background-color: aliceblue;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition:0.3s ease;
 }
 
-#filter-search{
-    margin-right:10px ;
-    font-size: 16px;
+th:hover {
+    background-color: #e9ecef;
 }
 
-#filter{
-    margin-left: 300px;
-    width: 76%;
-    padding: 20px;
+/* Filter/Search */
+#filter {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
     display: flex;
     justify-content: flex-end;
-    /* background-color: aliceblue; */
+    gap: 10px;
 }
 
-#filter input{
-    padding: 5px;
-    height: 27px;
+#filter-search {
+    font-size: 16px;
+    font-weight: bold;
 }
 
-#table{
-    margin-left: 300px;
-    width: 76%;
-    overflow: scroll;
-    /* margin-top: 20px; */
+#filter input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
-@media (max-width:950px){
-    #table{
-        margin-left: 20px;
-        width: 95%;
+/* Table Wrapper */
+#table {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    overflow-x: auto;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+#pagination-btn {
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+@media (max-width: 950px) {
+    #filter {
+        flex-direction: column;
+        align-items: center;
     }
-    
-    table{
-        width: 130%;
+
+    #container-table{
+        margin-left: 0;
+    }
+
+    #table {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: 14px;
     }
 }
