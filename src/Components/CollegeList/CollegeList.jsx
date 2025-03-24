@@ -17,6 +17,45 @@ export const CollegeList=()=>{
                         setSeen(!seen)
                     }} style={{
                         padding:"5px 10px"
+                    }}>
+                        <FontAwesomeIcon icon={faEllipsisV}/></li>
+                    {seen && 
+                        <ul 
+                        style=
+                        {{display:"flex",
+                            justifyContent:"right",
+                            flexDirection: "column",
+                            position:"absolute",
+                            padding:"15px",
+                            backgroundColor:"white",
+                            boxShadow:"0px 0px 4px -2px black",
+                            borderRadius:"5px"
+                        }}>
+                            <li>Delete</li>
+                            <li>Rename</li>
+                    </ul>
+                    }
+                </ul>
+
+            </div>
+            <h1>Tribhuwan University</h1>
+            <div id="collegeContainer2">
+                <ul>
+                    <li>Aadim National College</li>
+                    <li>Chuchepati, Chabahil, Kathmandu</li>
+                    <li>12345</li>
+                </ul>
+            </div>
+        </div>
+        {/* ----------------------------------- */}
+        <div id="collegeSubContainer">
+            <div id="collegeContainer1">
+                <div id="collegeProfile"><button>T</button></div>
+                <ul id="collegeMenu">
+                    <li onClick={()=>{
+                        setSeen(!seen)
+                    }} style={{
+                        padding:"5px 10px"
                     }}><FontAwesomeIcon icon={faEllipsisV}/></li>
                     {seen && 
                         <ul style={{display:"flex",
@@ -35,12 +74,12 @@ export const CollegeList=()=>{
                 </ul>
 
             </div>
-            <h1>College Name</h1>
+            <h1>Tribhuwan University</h1>
             <div id="collegeContainer2">
                 <ul>
-                    <li>college name</li>
-                    <li>college location</li>
-                    <li>Board number</li>
+                    <li>Aadim National College</li>
+                    <li>Chuchepati, Chabahil, Kathmandu</li>
+                    <li>12345</li>
                 </ul>
             </div>
         </div>
