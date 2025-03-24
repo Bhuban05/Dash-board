@@ -22,6 +22,7 @@ import Course from './Components/Education-management/Course/Course'
 import Board from './Components/Education-management/Board/Board'
 
 
+
 function App() {
   return (
     <>
@@ -31,12 +32,13 @@ function App() {
           <Route path="/login" element={<Login />} />
            
             <Route path="/sign-up" element={<Reset/>} />
-            <Route path="/" element={<Dash/>} />
+            <Route path="/dash" element={<Dash/>} />
             <Route path="/otp" element={<OTP/>} />
             <Route path="/forget" element={<Forget/>} />
             <Route path="/table" element={<Table/>} />
             <Route path="/course" element={<Course/>} />
             <Route path="/board" element={<Board/>} />
+          
             
            <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>

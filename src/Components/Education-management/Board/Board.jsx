@@ -1,53 +1,38 @@
-import { useState, useEffect } from "react";
-import { board } from "../../Auth/API";
+import { useState } from "react";
+// import axiosInstance from "../../utils/axiosInstance";  // Import Axios instance
 import Navbar from "../../Navbar/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSearchParams } from "react-router-dom";
+import axiosInstance from "../../Intercepter/axiosInstance";
 
-function Board() {
+
+function Test() {
   const [boardName, setBoardName] = useState("");
   const [description, setDescription] = useState("");
   const [boardType, setBoardType] = useState("NEPAL");
-  const [token, setToken] = useState(" "); 
 
-  useEffect(() => {
-    const savedToken = localStorage.getItem("accessToken"); 
-    if (savedToken) {
-      console.log(savedToken)
-      setToken(savedToken);
-    }
-  }, []);
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!token) {
-        toast.error("Authentication token is missing. Please log in.");
-        return;
-    }
-
     const requestData = { 
-        name: boardName,
-        description: description,
-        boardType: boardType,
+      name: boardName,
+      description: description,
+      boardType: boardType,
     };
 
     try {
-      const response = await board(token, requestData);
-
-      console.log("Response:", response.data);
+        const response = await axiosInstance.post("/board", requestData);
 
       if (response.status === 200) {
-          toast.success("Board created successfully!");
+        toast.success("successfully!");
       } else {
-          toast.error("Board creation failed.");
+        toast.error("failed.");
       }
-  } catch (error) {
+    } catch (error) {
       console.error("Error:", error);
       toast.error("Failed to create board.");
-  }
-};
+    }
+  };
 
   return (
     <section className="h-screen flex items-center justify-center mt-10">
@@ -67,7 +52,6 @@ function Board() {
 
           <textarea
             maxLength="350"
-            id="message"
             rows="6"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -105,7 +89,7 @@ function Board() {
             onClick={handleSubmit}
             className="border-2 bg-blue-700 text-white w-full mt-2.5 py-2 rounded-2xl cursor-pointer"
           >
-          Create
+            Create
           </button>
         </div>
       </div>
@@ -116,4 +100,4 @@ function Board() {
   );
 }
 
-export default Board;
+export default Test;
