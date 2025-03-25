@@ -29,8 +29,21 @@ export const board = (token, data) => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
       },
+
   });
-};
+  
+}
+
+export const board2 = (token, data) => {
+  return API.post(API_ENDPOINTS.BOARD, data, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+      },
+
+  });
+}
+
 
 export default API;
 

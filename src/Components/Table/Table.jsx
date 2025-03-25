@@ -5,22 +5,34 @@ import axiosInstance from "../Intercepter/axiosInstance";
 
 
 const Table = ({ columns = [], rowsPerPage = 5 }) => {
-  const [data, setData] = useState([]); 
-  const [filteredData, setFilteredData] = useState([]); 
-  const [search, setSearch] = useState(""); 
-  const [currentPage, setCurrentPage] = useState(1); 
-  const [sortField, setSortField] = useState(null); 
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
+  const [loading, setLoading] = useState(true);
 
-  
+
   useEffect(() => {
-    axios
-     axiosInstance.get("/board")
-      .then((res) => {
-        setData(res.data);
-        setFilteredData(res.data); 
-      })
-      .catch((err) => console.error("Error fetching data:", err));
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await axiosInstance.get("/board2");
+        if (Array.isArray(res.data)) {
+          setData(res.data);
+          setFilteredData(res.data);
+        } else {
+          console.error("not response ", res.data);
+        }
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -29,8 +41,8 @@ const Table = ({ columns = [], rowsPerPage = 5 }) => {
       columns.some((col) => (item[col]?.toString().toLowerCase() || "").includes(lowerSearch))
     );
     setFilteredData(filtered);
-    setCurrentPage(1); 
-  }, [search, data, columns]);
+    setCurrentPage(1);
+  }, [search, data]);
 
   // Sorting function
   const handleSort = (field) => {
