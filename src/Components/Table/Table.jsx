@@ -4,7 +4,7 @@ import "./Table.css";
 import axiosInstance from "../Intercepter/axiosInstance";
 
 
-const Table = ({ columns = [], rowsPerPage = 5 }) => {
+const Table = () => {
   const [data, setData] = useState([]); 
   const [filteredData, setFilteredData] = useState([]); 
   const [search, setSearch] = useState(""); 
@@ -14,23 +14,21 @@ const Table = ({ columns = [], rowsPerPage = 5 }) => {
 
   
   useEffect(() => {
-    axios
-     axiosInstance.get("/board")
-      .then((res) => {
+    axios 
+    axiosInstance.get("/board").then((res) => {
         setData(res.data);
         setFilteredData(res.data); 
-      })
-      .catch((err) => console.error("Error fetching data:", err));
+      }).catch((err) => console.error("Error fetching data:", err));
   }, []);
 
-  useEffect(() => {
-    const lowerSearch = search.toLowerCase();
-    const filtered = data.filter((item) =>
-      columns.some((col) => (item[col]?.toString().toLowerCase() || "").includes(lowerSearch))
-    );
-    setFilteredData(filtered);
-    setCurrentPage(1); 
-  }, [search, data, columns]);
+  // useEffect(() => {
+  //   const lowerSearch = search.toLowerCase();
+  //   const filtered = data.filter((item) =>
+  //     columns.some((col) => (item[col]?.toString().toLowerCase() || "").includes(lowerSearch))
+  //   );
+  //   setFilteredData(filtered);
+  //   setCurrentPage(1); 
+  // }, [search, data, columns]);
 
   // Sorting function
   const handleSort = (field) => {
@@ -47,8 +45,8 @@ const Table = ({ columns = [], rowsPerPage = 5 }) => {
   };
 
   // Pagination logic
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-  const paginatedData = filteredData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+  // const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+  // const paginatedData = filteredData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
 
   return (
     <div id="container-table">
@@ -93,7 +91,7 @@ const Table = ({ columns = [], rowsPerPage = 5 }) => {
       </div>
 
       {/* Pagination Controls */}
-      <div className="pagination">
+      {/* <div className="pagination">
         <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
           Prev
         </button>
@@ -103,7 +101,7 @@ const Table = ({ columns = [], rowsPerPage = 5 }) => {
         <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>
           Next
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
