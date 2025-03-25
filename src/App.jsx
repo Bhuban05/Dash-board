@@ -32,7 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
            
             <Route path="/sign-up" element={<Reset/>} />
-            <Route path="/dash" element={<Dash/>} />
+            <Route path="/" element={<Dash/>} />
             <Route path="/otp" element={<OTP/>} />
             <Route path="/forget" element={<Forget/>} />
             <Route path="/table" element={<Table/>} />
