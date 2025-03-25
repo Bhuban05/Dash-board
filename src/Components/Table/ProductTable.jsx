@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Table from "./Table";
 const ProductTable = () => {
   const columns = ["Product", "Price", "Stock"];
@@ -53,6 +54,7 @@ const ProductTable = () => {
     { Product: "Portable Monitor", Price: "$180", Stock: "Available" },
   ];
 
+
   return (
     
     <div>
@@ -60,4 +62,4 @@ const ProductTable = () => {
     </div>
   );
 };
-export default ProductTable;;;
+export default ProductTable;

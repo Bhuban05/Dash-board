@@ -5,7 +5,7 @@ import { faPause, faStar } from '@fortawesome/free-solid-svg-icons'
 import { CollegeList } from '../CollegeList/CollegeList'
 import "./Dash.css"
 import Navbar from '../Navbar/Navbar'
-import ProductTable from '../Table/ProductTable'
+// import ProductTable from '../Table/ProductTable'
 import StudentId from '../Table/StudentId'
 //  import Sidebar from "../Sidebar/Sidebar"
 
@@ -32,7 +32,7 @@ function Dash() {
             <div>
             {/* <Crm/> */}
             <CollegeList/>
-            <ProductTable/>
+            {/* <ProductTable/> */}
             <StudentId/>
            
             </div>
