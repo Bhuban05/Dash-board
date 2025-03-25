@@ -87,8 +87,7 @@ function Test() {
 
           <button
             onClick={handleSubmit}
-            className="border-2 bg-blue-700 text-white w-full mt-2.5 py-2 rounded-2xl cursor-pointer"
-          >
+            className="border-2 bg-blue-700 text-white w-full mt-2.5 py-2 rounded-2xl cursor-pointer">
             Create
           </button>
         </div>
@@ -97,7 +96,7 @@ function Test() {
       <Navbar />
       <ToastContainer />
     </section>
-  );
+  ); 
 }
 
 export default Test;
