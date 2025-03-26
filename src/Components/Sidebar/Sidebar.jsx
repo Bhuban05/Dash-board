@@ -70,8 +70,8 @@ export const Sidebar = () => {
       title: "Education",
       icon: <FontAwesomeIcon icon={faPieChart} />,
       drop: [
-        { title: "AddBoard", path: "/AddBoard"   },
-    
+        { title: "Board", path: "/Board"   },
+
         { title: "Course", path: "/Course" },
       ],
     },

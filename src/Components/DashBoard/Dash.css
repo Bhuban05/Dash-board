@@ -1,13 +1,13 @@
 #container {
     display: flex;
     flex-direction: column;
+    margin-top: 70px;
 }
 
 #Create-board{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 250px;
     margin-left: 300px;
 }
 
@@ -16,7 +16,11 @@
     font-weight: 500;
 }
 
-#Create-board input{
+#Create-board button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     padding: 10px 30px;
     background-color: rgba(33, 113, 253, 0.795);
     color: white;

@@ -37,7 +37,7 @@ function App() {
             <Route path="/forget" element={<Forget/>} />
             <Route path="/table" element={<Table/>} />
             <Route path="/course" element={<Course/>} />
-            <Route path="/boardlist" element={<BoardList/>} />
+            <Route path="/Board" element={<BoardList/>} />
             <Route path="/Addboard" element={<AddBoard/>} />
 
 
