@@ -4,12 +4,14 @@ import Navbar from "../../Navbar/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../Intercepter/axiosInstance";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
-function Test() {
+function AddBoard() {
   const [boardName, setBoardName] = useState("");
   const [description, setDescription] = useState("");
   const [boardType, setBoardType] = useState("NEPAL");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +26,8 @@ function Test() {
         const response = await axiosInstance.post("/board", requestData);
 
       if (response.status === 200) {
+       
+        navigate("/")
         toast.success("successfully!");
       } else {
         toast.error("failed.");
@@ -31,10 +35,23 @@ function Test() {
     } catch (error) {
       console.error("Error:", error);
       toast.error("Failed to create board.");
+    };
+
+    const resquestData = {
+      FOREIGN: FOREIGN,
+
     }
+  //   try {
+  //     const response  =  await axiosInstance .get("/types") 
+      
+  //   } catch (error) {
+  //     console.log("Error:", error);
+  //     toast.error("failed to create  board.")
+  //     }
+
   };
 
-  return (
+return (
     <section className="h-screen flex items-center justify-center mt-10">
       <div className="h-120 container px-6 py-2 w-130 max-w-4xl rounded-lg flex flex-wrap border-gray-500 shadow-2xl">
         <div>
@@ -99,4 +116,4 @@ function Test() {
   ); 
 }
 
-export default Test;
+export default AddBoard;

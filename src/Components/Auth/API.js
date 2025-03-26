@@ -48,5 +48,8 @@ export const board2 = (token, data) => {
 }
 
 
+export const types = () => API.post(API_ENDPOINTS.TYPES);
+
+
 export default API;
 
