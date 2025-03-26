@@ -1,5 +1,6 @@
 #container-table{
     margin-left: 300px;
+    margin-bottom: 50px;
 }
 
 table {
@@ -8,6 +9,7 @@ table {
     margin-bottom: 10px;
     border-collapse: collapse;
     overflow-x: auto;
+    text-align: center;
 }
 
 th, td {
@@ -32,12 +34,17 @@ th:hover {
     margin: 20px auto;
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    align-items: center;
+}
+
+#filter input{
+    width: 300px;
 }
 
 #filter-search {
     font-size: 16px;
     font-weight: bold;
+    margin-right: 10px;
 }
 
 #filter input {
@@ -73,6 +80,18 @@ th:hover {
     color: white;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#Table-data{
+    width: 100px;
+}
+
+#Table-icon{
+    position: absolute;
+    font-size: 18px;
+    margin-top: 3px;
+    font-weight: bolder;
+    margin-left: 5px;
 }
 
 @media (max-width: 950px) {

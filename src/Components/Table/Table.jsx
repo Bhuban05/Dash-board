@@ -1,5 +1,6 @@
 import "./Table.css";
 import { useState } from "react";
+import { LuChevronsUpDown } from "react-icons/lu";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   const [search, setSearch] = useState(""); // Filtering useState
@@ -79,7 +80,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
                 <tr>
                   {columns.map((col) => (
                     <th key={col} onClick={() => handleSort(col)} style={{ cursor: "pointer" }}>
-                      {col} {sortField === col ? (direction === "asc" ? "🔼" : "🔽") : ""}
+                      {col} {sortField === col ? (direction === "asc" ? <span id="Table-icon"><LuChevronsUpDown /></span>: <span id="Table-icon"><LuChevronsUpDown /></span>) : ""}
                     </th>
                   ))}
                 </tr>
@@ -88,7 +89,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
                 {paginatedData.map((row, index) => (
                   <tr key={index}>
                     {columns.map((col) => (
-                      <td key={col}>{row[col] ?? "N/A"}</td>
+                      <td id="Table-data" key={col}>{row[col] ?? "N/A"}</td>
                     ))}
                   </tr>
                 ))}
