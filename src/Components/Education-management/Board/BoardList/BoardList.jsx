@@ -6,6 +6,7 @@ import { useState } from "react"
 export const BoardList=()=>{
 
     const [seen,setSeen] = useState(false);
+    const [visible,setVisible] = useState(false);
 
     return<>
     <div id="collegeContainer">
@@ -53,11 +54,11 @@ export const BoardList=()=>{
                 <div id="collegeProfile"><button>T</button></div>
                 <ul id="collegeMenu">
                     <li onClick={()=>{
-                        setSeen(!seen)
+                        setVisible(!visible)
                     }} style={{
                         padding:"5px 10px"
                     }}><FontAwesomeIcon icon={faEllipsisV}/></li>
-                    {seen && 
+                    {visible && 
                         <ul style={{display:"flex",
                             justifyContent:"right",
                             flexDirection: "column",

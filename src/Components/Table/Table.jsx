@@ -57,7 +57,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   return (
     <div id="container-table">
       <div id="filter">
-        <label className="mr-0.5" id="filter-search">Search </label>
+        <label className="mr-0.5" id="filter-search">Search: </label>
         <input
           type="text"
           className="border-2 rounded-md"
