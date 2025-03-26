@@ -14,11 +14,13 @@ import SignUp from "./Components/Auth/SignUp";
 
 import Forget from "./Components/Auth/Forget";
 import { ToastContainer } from "react-toastify";
-import ResetPassword from "./Components/Auth/resetPassword";
-import Table from "./Components/Table/Table";
-import Course from "./Components/Education-management/Course/Course";
-import AddBoard from "./Components/Education-management/Board/addBoard";
-import { BoardList } from "./Components/Education-management/Board/BoardList/BoardList";
+import ResetPassword from './Components/Auth/resetPassword'
+import Table from './Components/Table/Table'
+import Course from './Components/Education-management/Course/Course'
+import { BoardList } from './Components/Education-management/Board/BoardList/BoardList'
+import AddBoard from './Components/Education-management/Board/addBoard'
+
+
 
 
 function App() {
@@ -28,18 +30,20 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          
+            <Route path="/sign-up" element={<Reset/>} />
+            <Route path="/" element={<Dash/>} />
+            <Route path="/otp" element={<OTP/>} />
+            <Route path="/forget" element={<Forget/>} />
+            <Route path="/table" element={<Table/>} />
+            <Route path="/course" element={<Course/>} />
+            <Route path="/boardlist" element={<BoardList/>} />
+            <Route path="/Addboard" element={<AddBoard/>} />
 
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/" element={<Dash />} />
-          <Route path="/otp" element={<OTP />} />
-          <Route path="/forget" element={<Forget />} />
-          <Route path="/table" element={<Table />} />
-          <Route path="/course" element={<Course />} />
-          <Route path="/Addboard" element={<AddBoard />} />
-          <Route path="/Addboard" element={<AddBoard />} />
-          <Route path="/boardlist" element={<BoardList />} />
 
-          <Route path="/reset-password" element={<ResetPassword />} />
+          
+            
+          <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>
       </BrowserRouter>
     </>

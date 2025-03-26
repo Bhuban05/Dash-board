@@ -18,22 +18,22 @@ function Dash() {
       {/* <Sidebar/> */}
       <div className='h-screen flex ' id='container'>
 
-        <div className='lg:mx-76  h-screen'>
-        <h2 className='text-3xl  font-bold mt-25'>Board Management
+        <div className='mt-25' id='Create-board' >
 
-          </h2>
+          <h2 className='mx-150'>Board Management</h2>
 
-        </div>
-        </div>
-
-     <BoardList />
-      {/* <ProductTable/> */}
-      <StudentId />
-
-      </div>
-    
-
-  )
+          <input type='button' value="Create Board" />
+            </div>
+            <div>
+            {/* <Crm/> */}
+           <BoardList/>
+            {/* <ProductTable/> */}
+            <StudentId/>
+           
+            </div>
+</div>
+</div>
+)
 }
 
 export default Dash;

@@ -2,3 +2,11 @@
     display: fleex;
     flex-direction: column;
 }
+
+#Create-board{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 250px;
+    
+}
