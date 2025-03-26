@@ -2,6 +2,7 @@ import React from 'react'
 import './Dash.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPause, faStar } from '@fortawesome/free-solid-svg-icons'
+import { IoMdAdd } from "react-icons/io";
 
 import "./Dash.css"
 import Navbar from '../Navbar/Navbar'
@@ -19,26 +20,25 @@ function Dash() {
 
         <div className='lg:mx-76  h-screen'>
 
-          <h2 className='text-3xl font-bold mt-25'>Board Management</h2>
-            {/* <p className='text-gray-600'>Here’s what’s going on at your business right now</p>
-            <div className='sm:flex gap-4'>
-            <p className='mt-7 space-x-3'><FontAwesomeIcon icon={faStar}/> <span className='font-bold text-xl '>57 new orders</span> <br />
-            <span className='text-xs  ms-7'> Awating processing </span> </p>
-            <p className='mt-7 space-x-3'><FontAwesomeIcon icon={faPause}/> <span className='font-bold text-xl '>5 orders</span> <br />
-            <span className='text-xs  ms-7'> On hold </span> </p>
-            <p className='mt-7 space-x-3'><FontAwesomeIcon icon={faStar}/> <span className='font-bold text-xl '>15 products</span> <br />
-            <span className='text-xs ms-9'> Out of stock</span> </p> */}
-            {/* </div> */}
+     
+          <h2 className='text-3xl  font-bold mt-25'>Board Management
+
+          </h2>
+          <p className='ms-290 flex align-item gap-3  bg-blue-700   rounded'> <IoMdAdd className='mt-1.5 space-x-5' />create a board</p>
             </div>
-            <div>
+            
+     
+     
+
+            </div>
             {/* <Crm/> */}
            <BoardList/>
             {/* <ProductTable/> */}
             <StudentId/>
            
-            </div>
+          
 </div>
-</div>
+
 )
 }
 

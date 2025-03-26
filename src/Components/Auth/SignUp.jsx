@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import sig from "../Auth/sig.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Signup } from "../Auth/API.js";
+import { Signup } from "./API.js";
 
-function Reset() {
+function SignUp() {
   const navigate = useNavigate();
 
   // State variables for form fields
@@ -25,7 +25,6 @@ function Reset() {
     };
   }, [previewURL]);
 
-  
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
@@ -37,13 +36,11 @@ function Reset() {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    
     // if (!name || !address || !email || !file || !collegePhone || !levels) {
     //   toast.error("Please fill in all fields.");
     //   return;
     // }
 
-   
     const formData = new FormData();
     formData.append("collegeName", name);
     formData.append("collegeAddress", address);
@@ -53,11 +50,9 @@ function Reset() {
     formData.append("levels", levels);
 
     try {
-     
-      const response = await Signup(formData); 
+      const response = await Signup(formData);
       const data = await response.data;
 
-     
       // if (!response.ok) {
       //   throw new Error(data.message || "Signup failed. Please check your inputs.");
       // }
@@ -73,25 +68,16 @@ function Reset() {
   return (
     <section className="h-screen flex items-center justify-center">
       <div className="container px-6 py-2 w-full max-w-4xl flex flex-wrap bg-white rounded-2xl">
-       
         <div className="hidden lg:block w-1/2 rounded-2xl overflow-hidden">
-          <img 
-            src={sig} 
-            alt="Man" 
-            className="h-full w-full object-cover" 
-          />
+          <img src={sig} alt="Man" className="h-full w-full object-cover" />
         </div>
 
-        
         <div className="w-full lg:w-1/2 px-6">
           <h2 className="text-2xl font-semibold text-center mb-6">Sign Up</h2>
 
-         
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-      
           <form onSubmit={submitForm}>
-
             <div className="mb-4">
               <input
                 type="text"
@@ -112,7 +98,6 @@ function Reset() {
               />
             </div>
 
-
             <div className="mb-4">
               <input
                 type="email"
@@ -122,7 +107,6 @@ function Reset() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
 
             <div className="mb-4">
               {/* <PhoneInput
@@ -148,7 +132,6 @@ function Reset() {
               </select>
             </div>
 
-          
             <div className="mb-4">
               <label className="block text-xl font-semibold text-gray-700 mb-2">
                 Upload College PAN (Image)
@@ -162,7 +145,10 @@ function Reset() {
                   id="file"
                   onChange={handleFileUpload}
                 />
-                <label htmlFor="file" className="cursor-pointer text-center block">
+                <label
+                  htmlFor="file"
+                  className="cursor-pointer text-center block"
+                >
                   {previewURL ? (
                     <img
                       src={previewURL}
@@ -186,7 +172,8 @@ function Reset() {
                 onChange={() => setIsChecked(!isChecked)}
               />
               <p className="text-gray-600">
-                I agree to the <span className="text-blue-500">terms of use</span>
+                I agree to the{" "}
+                <span className="text-blue-500">terms of use</span>
               </p>
             </div>
             <button
@@ -198,9 +185,9 @@ function Reset() {
           </form>
         </div>
       </div>
-      <ToastContainer /> 
+      <ToastContainer />
     </section>
   );
 }
 
-export default Reset;
+export default SignUp;

@@ -1,55 +1,49 @@
-import './App.css'
+import "./App.css";
 
-import Reset from './Components/Auth/Reset'
- //import { Crm } from './Crm/Crm'
-import Dash from './Components/DashBoard/Dash'
+import Reset from "./Components/Auth/SignUp";
+//import { Crm } from './Crm/Crm'
+import Dash from "./Components/DashBoard/Dash";
 
-
-
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import ProtectRoute from './Components/Auth/ProtectRoute'
 
-import Login from './Components/Auth/Login'
+import Login from "./Components/Auth/Login";
 
-import OTP from './Components/Auth/OTP'
-import SignUp from './Components/Auth/Reset'
+import OTP from "./Components/Auth/OTP";
+import SignUp from "./Components/Auth/SignUp";
 
-import Forget from './Components/Auth/Forget'
+import Forget from "./Components/Auth/Forget";
 import { ToastContainer } from "react-toastify";
-import ResetPassword from './Components/Auth/resetPassword'
-import Table from './Components/Table/Table'
-import Course from './Components/Education-management/Course/Course'
-import { BoardList } from './Components/Education-management/Board/BoardList/BoardList'
-import AddBoard from './Components/Education-management/Board/addBoard'
-
-
+import ResetPassword from "./Components/Auth/resetPassword";
+import Table from "./Components/Table/Table";
+import Course from "./Components/Education-management/Course/Course";
+import AddBoard from "./Components/Education-management/Board/addBoard";
+import { BoardList } from "./Components/Education-management/Board/BoardList/BoardList";
 
 
 function App() {
   return (
     <>
       <ToastContainer />
-    <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-           
-            <Route path="/sign-up" element={<Reset/>} />
-            <Route path="/" element={<Dash/>} />
-            <Route path="/otp" element={<OTP/>} />
-            <Route path="/forget" element={<Forget/>} />
-            <Route path="/table" element={<Table/>} />
-            <Route path="/course" element={<Course/>} />
-            <Route path="/boardlist" element={<BoardList/>} />
-            <Route path="/Addboard" element={<AddBoard/>} />
 
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/" element={<Dash />} />
+          <Route path="/otp" element={<OTP />} />
+          <Route path="/forget" element={<Forget />} />
+          <Route path="/table" element={<Table />} />
+          <Route path="/course" element={<Course />} />
+          <Route path="/Addboard" element={<AddBoard />} />
+          <Route path="/Addboard" element={<AddBoard />} />
+          <Route path="/boardlist" element={<BoardList />} />
 
-          
-            
-           <Route path="/reset-password" element={<ResetPassword/>} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
-      </BrowserRouter> 
-</>
-  )
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
