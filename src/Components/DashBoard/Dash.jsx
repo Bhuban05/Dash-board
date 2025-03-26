@@ -1,14 +1,10 @@
 import React from 'react'
 import './Dash.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPause, faStar } from '@fortawesome/free-solid-svg-icons'
-
+import { Link } from 'react-router-dom'
 import "./Dash.css"
 import Navbar from '../Navbar/Navbar'
-// import ProductTable from '../Table/ProductTable'
 import StudentId from '../Table/StudentId'
 import { BoardList } from '../Education-management/Board/BoardList/BoardList'
-//  import Sidebar from "../Sidebar/Sidebar"
 
 function Dash() {
   return (
@@ -20,8 +16,9 @@ function Dash() {
         <div className='mt-25' id='Create-board' >
 
           <h2>Board Management</h2>
-
-          <input type='button' value="Create Board" />
+          <Link to="/Addboard"
+          >
+          <input type='button' value="Create Board" /></Link>
             </div>
             <div>
             {/* <Crm/> */}
