@@ -2,11 +2,12 @@ import React from 'react'
 import './Dash.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPause, faStar } from '@fortawesome/free-solid-svg-icons'
-import { CollegeList } from '../CollegeList/CollegeList'
+
 import "./Dash.css"
 import Navbar from '../Navbar/Navbar'
 // import ProductTable from '../Table/ProductTable'
 import StudentId from '../Table/StudentId'
+import { BoardList } from '../Education-management/Board/BoardList/BoardList'
 //  import Sidebar from "../Sidebar/Sidebar"
 
 function Dash() {
@@ -31,7 +32,7 @@ function Dash() {
             </div>
             <div>
             {/* <Crm/> */}
-            <CollegeList/>
+           <BoardList/>
             {/* <ProductTable/> */}
             <StudentId/>
            

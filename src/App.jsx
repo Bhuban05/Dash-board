@@ -19,7 +19,9 @@ import { ToastContainer } from "react-toastify";
 import ResetPassword from './Components/Auth/resetPassword'
 import Table from './Components/Table/Table'
 import Course from './Components/Education-management/Course/Course'
-import Board from './Components/Education-management/Board/Board'
+import { BoardList } from './Components/Education-management/Board/BoardList/BoardList'
+import AddBoard from './Components/Education-management/Board/addBoard'
+
 
 
 
@@ -37,7 +39,10 @@ function App() {
             <Route path="/forget" element={<Forget/>} />
             <Route path="/table" element={<Table/>} />
             <Route path="/course" element={<Course/>} />
-            <Route path="/board" element={<Board/>} />
+            <Route path="/boardlist" element={<BoardList/>} />
+            <Route path="/Addboard" element={<AddBoard/>} />
+
+
           
             
            <Route path="/reset-password" element={<ResetPassword/>} />

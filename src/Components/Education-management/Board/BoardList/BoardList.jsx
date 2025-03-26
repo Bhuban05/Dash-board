@@ -1,9 +1,9 @@
 import { faEllipsis, faEllipsisV } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import "./CollegeList.css"
+import './BoardList.css';
 import { useState } from "react"
 
-export const CollegeList=()=>{
+export const BoardList=()=>{
 
     const [seen,setSeen] = useState(false);
 

@@ -14,26 +14,26 @@ const Table = ({ columns = [], rowsPerPage = 5 }) => {
   const [loading, setLoading] = useState(true);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const res = await axiosInstance.get("/board2");
-        if (Array.isArray(res.data)) {
-          setData(res.data);
-          setFilteredData(res.data);
-        } else {
-          console.error("not response ", res.data);
-        }
-      } catch (err) {
-        console.error("Error fetching data:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const res = await axiosInstance.get("/board2");
+  //       if (Array.isArray(res.data)) {
+  //         setData(res.data);
+  //         setFilteredData(res.data);
+  //       } else {
+  //         console.error("not response ", res.data);
+  //       }
+  //     } catch (err) {
+  //       console.error("Error fetching data:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     const lowerSearch = search.toLowerCase();

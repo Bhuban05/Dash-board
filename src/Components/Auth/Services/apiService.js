@@ -8,6 +8,7 @@ const API_ENDPOINTS = {
   RESETPASSWORD: `/auth/reset-password`, 
   COLLEGE: `/college/get-all`, 
   BOARD: `/board`, 
+  TYPES: `/types`,
   
 }
 
