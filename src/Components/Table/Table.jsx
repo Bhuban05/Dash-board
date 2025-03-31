@@ -1,6 +1,8 @@
+import axios from "axios";
 import "./Table.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuChevronsUpDown } from "react-icons/lu";
+import axiosInstance from "../Intercepter/axiosInstance";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   const [search, setSearch] = useState(""); // Filtering useState
@@ -10,6 +12,9 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   const [daata, setDaata] = useState([...data]); // Sorting useState
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
+  const[loading, setLoading] = useState([]);
+  const[users, setUsers] =  useState([]);
+  
 
   // filtering logic
   let filterData = [];
@@ -53,6 +58,24 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     setDirection(newDirection);
     setDaata(sortedData);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/college/get-all");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+ 
 
   return (
     <div id="container-table">

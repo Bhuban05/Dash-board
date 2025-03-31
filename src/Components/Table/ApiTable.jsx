@@ -1,5 +1,16 @@
 import { useState } from "react"
+import Table from "./Table"
 
-const ApiTable=()=>{
+export const ApiTable=()=>{
+    
+   
+
+    return(
+
+
+        <div>
+          
+        </div>
+    )
     
 }
