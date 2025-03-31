@@ -39,10 +39,6 @@ function App() {
             <Route path="/course" element={<Course/>} />
             <Route path="/Board" element={<BoardList/>} />
             <Route path="/Addboard" element={<AddBoard/>} />
-
-
-          
-            
           <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>
       </BrowserRouter>

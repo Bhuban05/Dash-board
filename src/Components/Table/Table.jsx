@@ -42,7 +42,6 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     if (sortField === field && direction === "asc") {
       newDirection = "desc";
     }
-
     const sortedData = [...daata].sort((a, b) => {
       if (a[field] < b[field]) return newDirection === "asc" ? -1 : 1;
       if (a[field] > b[field]) return newDirection === "asc" ? 1 : -1;
