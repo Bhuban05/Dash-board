@@ -65,13 +65,17 @@ export const Sidebar = () => {
         { title: "Travel Agency", path: "/travel_agency" },
       ],
     },
+    {
+      title: "college Manage",
+      icon: <FontAwesomeIcon icon={faBarChart} />,
+    },
    
 {
       title: "Education",
       icon: <FontAwesomeIcon icon={faPieChart} />,
       drop: [
-        { title: "Board", path: "/AddBoard"   },
-    
+        { title: "Board", path: "/Board"   },
+
         { title: "Course", path: "/Course" },
       ],
     },

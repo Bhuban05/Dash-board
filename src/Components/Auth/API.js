@@ -26,26 +26,26 @@ export const resetPassword = () => API.post(API_ENDPOINTS.RESETPASSWORD);
 
 export const college = (formData) => API.get(API_ENDPOINTS.COLLEGE, formData);
 
-export const board = (token, data) => {
-  return API.post(API_ENDPOINTS.BOARD, data, {
-      headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-      },
+// export const board = (token, data) => {
+//   return API.post(API_ENDPOINTS.BOARD, data, {
+//       headers: {
+//           Authorization: `Bearer ${token}`,
+//           "Content-Type": "application/json",
+//       },
 
-  });
+//   });
   
-}
+// }
 
-export const board2 = (token, data) => {
-  return API.post(API_ENDPOINTS.BOARD, data, {
-      headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-      },
+// export const board2 = (token, data) => {
+//   return API.get(API_ENDPOINTS.BOARD, data, {
+//       headers: {
+//           Authorization: `Bearer ${token}`,
+//           "Content-Type": "application/json",
+//       },
 
-  });
-}
+//   });
+// }
 
 
 export const types = () => API.post(API_ENDPOINTS.TYPES);
