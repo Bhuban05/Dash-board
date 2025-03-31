@@ -17,13 +17,14 @@ import { ToastContainer } from "react-toastify";
 import ResetPassword from './Components/Auth/resetPassword'
 import Table from './Components/Table/Table'
 import Course from './Components/Education-management/Course/Course'
-import { BoardList } from './Components/Education-management/Board/BoardList/BoardList'
-import AddBoard from './Components/Education-management/Board/addBoard'
-
-
-
-
+// import { BoardList } from './Components/Education-management/Board/BoardList/BoardList'
+// import AddBoard from './Components/Education-management/Board/addBoard'
+import axiosInstance from "./Components/Intercepter/axiosInstance";
+import { useEffect, useState } from "react";
+import AddBoard from "./Components/Education-management/Board/addBoard";
+import { BoardList } from "./Components/Education-management/Board/BoardList/BoardList";
 function App() {
+
   return (
     <>
       <ToastContainer />
@@ -38,7 +39,7 @@ function App() {
             <Route path="/table" element={<Table/>} />
             <Route path="/course" element={<Course/>} />
             <Route path="/Board" element={<BoardList/>} />
-            <Route path="/Addboard" element={<AddBoard/>} />
+            <Route path="/Addboard" element={<AddBoard/>} />  
           <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>
       </BrowserRouter>

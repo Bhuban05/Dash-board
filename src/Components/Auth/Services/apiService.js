@@ -9,6 +9,7 @@ const API_ENDPOINTS = {
   COLLEGE: `/college/get-all`, 
   BOARD: `/board`, 
   TYPES: `/types`,
+
   
 }
 

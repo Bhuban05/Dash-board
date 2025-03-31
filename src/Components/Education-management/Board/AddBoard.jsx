@@ -27,7 +27,7 @@ function AddBoard() {
 
       if (response.status === 200) {
        
-        navigate("/")
+        navigate("/Board")
         toast.success("successfully!");
       } else {
         toast.error("failed.");
@@ -37,17 +37,7 @@ function AddBoard() {
       toast.error("Failed to create board.");
     };
 
-    const resquestData = {
-      FOREIGN: FOREIGN,
-
-    }
-  //   try {
-  //     const response  =  await axiosInstance .get("/types") 
-      
-  //   } catch (error) {
-  //     console.log("Error:", error);
-  //     toast.error("failed to create  board.")
-  //     }
+   
 
   };
 

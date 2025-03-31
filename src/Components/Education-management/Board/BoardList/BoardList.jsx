@@ -1,118 +1,161 @@
-import { faEllipsis, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./BoardList.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { TiPlus } from "react-icons/ti";
 import Navbar from "../../../Navbar/Navbar";
+import axiosInstance from "../../../Intercepter/axiosInstance";
 
 export const BoardList = () => {
-    const [seen, setSeen] = useState(false);
-    const [visibal, setVisibal] = useState(false);
+    const [boards, setBoards] = useState([]); 
+    const [menuVisible, setMenuVisible] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1); 
+    const rowsPerPage = 1; 
+      const [open, setOpen] = useState(false);
+      const dropdownRef = useRef(null);
+    
+
+    useEffect(() => {
+        const dataFetch = async () => {
+            try {
+                setLoading(true);
+                const response = await axiosInstance.get("/board?page=0&size=100"); 
+                if (Array.isArray(response.data.data.content)) {
+                    setBoards(response.data.data.content);
+                } else {
+                    console.error("No response:", response.data);
+                }
+            } catch (error) {
+                setError("Error fetching data.");
+                console.error("Error fetching data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        dataFetch();
+    }, []);
+
+   
+   
+    const totalPages = Math.ceil(boards.length / rowsPerPage);
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const paginatedData = boards.slice(startIndex, startIndex + rowsPerPage);
+
+    const toggleMenu = (id) => {
+        setMenuVisible(menuVisible === id ? null : id);
+    };
+
+ 
+    const nextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    
+    
+    useEffect(() => {
+        function handleClickOutside(event) {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setOpen(false);
+          }
+        }
+    
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+      }, []);
 
     return (
         <>
-        <Navbar/>
+            <Navbar />
             <div className="mt-25" id="Create-board">
                 <h2>Board Management</h2>
                 <Link to="/Addboard">
                     <button>
-                    <TiPlus />
-                    Create Board
+                        <TiPlus />
+                        Create Board
                     </button>
                 </Link>
             </div>
+
             <div id="collegeContainer">
-                <div id="collegeSubContainer">
-                    <div id="collegeContainer1">
-                        <div id="collegeProfile">
-                            <button>T</button>
+                {loading ? (
+                    <div className="loading">
+                        <div role="status">
+                            <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                            </svg>
+                            <span className="sr-only">Loading...</span>
                         </div>
-                        <ul id="collegeMenu">
-                            <li
-                                onClick={() => {
-                                    setSeen(!seen);
-                                }}
-                                style={{
-                                    padding: "5px 10px",
-                                }}
-                            >
-                                <FontAwesomeIcon icon={faEllipsisV} />
-                            </li>
-                            {seen && (
-                                <ul
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "right",
-                                        flexDirection: "column",
-                                        position: "absolute",
-                                        padding: "15px",
-                                        backgroundColor: "white",
-                                        boxShadow: "0px 0px 4px -2px black",
-                                        borderRadius: "5px",
-                                    }}
-                                >
-                                    <li>Delete</li>
-                                    <li>Rename</li>
-                                </ul>
-                            )}
-                        </ul>
+                        <p>Loading board...</p>
                     </div>
-                    <h1>Tribhuwan University</h1>
-                    <div id="collegeContainer2">
-                        <ul>
-                            <li>Aadim National College</li>
-                            <li>Chuchepati, Chabahil, Kathmandu</li>
-                            <li>12345</li>
-                        </ul>
-                    </div>
-                </div>
-                {/* ----------------------------------- */}
-                <div id="collegeSubContainer">
-                    <div id="collegeContainer1">
-                        <div id="collegeProfile">
-                            <button>T</button>
-                        </div>
-                        <ul id="collegeMenu">
-                            <li
-                                onClick={() => {
-                                    setVisibal(!visibal);
-                                }}
-                                style={{
-                                    padding: "5px 10px",
-                                }}
-                            >
-                                <FontAwesomeIcon icon={faEllipsisV} />
-                            </li>
-                            {visibal && (
-                                <ul
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "right",
-                                        flexDirection: "column",
-                                        position: "absolute",
-                                        padding: "15px",
-                                        backgroundColor: "white",
-                                        boxShadow: "0px 0px 4px -2px black",
-                                        borderRadius: "5px",
-                                    }}
-                                >
-                                    <li>Delete</li>
-                                    <li>Rename</li>
-                                </ul>
-                            )}
-                        </ul>
-                    </div>
-                    <h1>Tribhuwan University</h1>
-                    <div id="collegeContainer2">
-                        <ul>
-                            <li>Aadim National College</li>
-                            <li>Chuchepati, Chabahil, Kathmandu</li>
-                            <li>12345</li>
-                        </ul>
-                    </div>
-                </div>
+                ) : error ? (
+                    <div>{error}</div>
+                ) : (
+                    <>
+                        {paginatedData.length > 0 ? (
+                            paginatedData.map((board) => (
+                                <div key={board.id} id="collegeSubContainer">
+                                    <div id="collegeContainer1">
+                                        <div id="collegeProfile">
+                                            <button>{board.name.charAt(0)}</button>
+                                        </div>
+                                        <ul id="collegeMenu">
+                                            <li onClick={() => toggleMenu(board.id)} style={{ padding: "5px 10px", cursor: "pointer" }}>
+                                                <FontAwesomeIcon icon={faEllipsisV} />
+                                            </li>
+                                            {menuVisible === board.id && (
+                                                <ul style={{
+                                                    display: "flex",
+                                                    justifyContent: "right",
+                                                    flexDirection: "column",
+                                                    position: "absolute",
+                                                    padding: "15px",
+                                                    backgroundColor: "white",
+                                                    boxShadow: "0px 0px 4px -2px black",
+                                                    borderRadius: "5px",
+                                                }}>
+                                                    <li>Delete</li>
+                                                    <li>Rename</li>
+                                                </ul>
+                                            )}
+                                        </ul>
+                                    </div>
+                                    <h1>{board.name}</h1>
+                                    <div id="collegeContainer2">
+                                        <ul>
+                                            <li>{board.college}</li>
+                                            <li>{board.location}</li>
+                                            <li>{board.code}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No boards available.</p>
+                        )}
+                    </>
+                )}
             </div>
+
+           
+            {boards.length > 0 && (
+                <div className="pagination-controls  ms-75">
+                    <button onClick={prevPage}  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" disabled={currentPage === 1}>previous</button>
+                    <span  className="text-blue-700"> pages {currentPage} of {totalPages} </span>
+                    <button onClick={nextPage} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" disabled={currentPage === totalPages}>Next</button>
+                </div>
+            )}
         </>
     );
 };
