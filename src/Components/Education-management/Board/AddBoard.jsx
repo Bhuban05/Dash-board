@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import axiosInstance from "../../utils/axiosInstance";  // Import Axios instance
 import Navbar from "../../Navbar/Navbar";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,6 +12,8 @@ function AddBoard() {
   const [description, setDescription] = useState("");
   const [boardType, setBoardType] = useState("NEPAL");
   const navigate = useNavigate();
+  const[users, setUsers]  = useState([]);
+  const[loading, setLoading]  = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,9 +40,27 @@ function AddBoard() {
     };
 
    
+  
+   
 
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/board/types");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+ 
 return (
     <section className="h-screen flex items-center justify-center mt-10">
       <div className="h-120 container px-6 py-2 w-130 max-w-4xl rounded-lg flex flex-wrap border-gray-500 shadow-2xl">

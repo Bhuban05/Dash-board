@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import "./Dash.css"
 import Navbar from '../Navbar/Navbar'
 import StudentId from '../Table/StudentId'
-import { BoardTable } from '../Table/BoardTable'
+import { CiSquarePlus } from "react-icons/ci";
+import { ApiTable } from '../Table/ApiTable'
 
 function Dash() {
   return (
@@ -12,7 +13,8 @@ function Dash() {
       <Navbar/>
         <div className='h-screen flex ' id='container'>
             <StudentId/>
-            <BoardTable/>
+            
+            
 </div>
 </div>
 )

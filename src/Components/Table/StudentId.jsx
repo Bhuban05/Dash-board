@@ -1,9 +1,13 @@
 import Table from "./Table";
 
-export default function StudentId(){
+export default function StudentId() {
     const data = [
-        { College_Name: "101", address: "Amit", Email: "BBA", Status: "21" },
-        { College_address: "102", Name: "Rahul", Course: "BCA", Age: "22" },
+        { CollegeName: "Aadim National College", Email: "pemba@gmail.com", phone: "9848484848", Address: "ktm", Status:<span  className="bg-amber-500  px-3  py-2  rounded-4xl  text-white">pending.....</span>, Action: <button className="rounded py-2 px-3 bg-blue-600 text-white cursor-pointer">Approved</button> },
+        { CollegeName: "Aadim National College", Email: "pemba@gmail.com", phone: "9848484848", Address: "ktm", Status:<span className="bg-amber-500  px-3  py-2  rounded-4xl  text-white">pending.....</span>, Action: <button className="rounded py-2 px-3 bg-blue-600 text-white cursor-pointer">Approved</button> },
+
+
+
+
         // { Id: "103", Name: "Sneha", Course: "BBA", Age: "20" },
         // { Id: "104", Name: "Priya", Course: "BCA", Age: "23" },
         // { Id: "105", Name: "Vikram", Course: "BBA", Age: "22" },
@@ -22,8 +26,10 @@ export default function StudentId(){
         // { Id: "118", Name: "Swati", Course: "BCA", Age: "23" },
         // { Id: "119", Name: "Ankit", Course: "BBA", Age: "21" },
         // { Id: "120", Name: "Tanvi", Course: "BCA", Age: "22" }
-];
-return<>
-    <Table data={data}/>
+
+    ]
+
+    return <>
+        <Table data={data} />
     </>
 }

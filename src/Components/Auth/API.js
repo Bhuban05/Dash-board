@@ -48,7 +48,8 @@ export const college = (formData) => API.get(API_ENDPOINTS.COLLEGE, formData);
 // }
 
 
-export const types = () => API.post(API_ENDPOINTS.TYPES);
+export const types = () => API.get(API_ENDPOINTS.TYPES);
+// export const getall = () => API.get(API_ENDPOINTS.GETALL);
 
 
 export default API;
