@@ -5,65 +5,32 @@ import { LuChevronsUpDown } from "react-icons/lu";
 import axiosInstance from "../Intercepter/axiosInstance";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
-  const [search, setSearch] = useState(""); // Filtering useState
-
-  const [currentPage, setCurrentPage] = useState(1); // Pagination useState
-
-  const [daata, setDaata] = useState([...data]); // Sorting useState
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [daata, setDaata] = useState([...data]);
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
-  const[loading, setLoading] = useState([]);
-  const[users, setUsers] =  useState([]);
-  
+  const [loading, setLoading] = useState(true);
+  const [apiData, setApiData] = useState([]);
 
-  // filtering logic
-  let filterData = [];
-  try {
-    if (!Array.isArray(data)) throw new Error("Invalid data format. Expected an array.");
-
-    if (!Array.isArray(columns) || columns.length === 0) {
-      columns = data.length > 0 ? Object.keys(data[0]) : [];
-    }
-
-    filterData = daata.filter((datas) => {
-      const name = datas?.Name?.toLowerCase() || "";
-      const course = datas?.Course?.toLowerCase() || "";
-      const product = datas?.Product?.toLowerCase() || "";
-      return name.includes(search.toLowerCase()) || course.includes(search.toLowerCase()) || product.includes(search.toLowerCase());
-    });
-  } catch (error) {
-    console.error("Error filtering data:", error);
-    filterData = [];
-  }
-
-  // pagination logic
-  const totalPages = Math.ceil(filterData.length / rowsPerPage);
-  const startIndex = (currentPage - 1) * rowsPerPage;
-  const paginatedData = filterData.slice(startIndex, startIndex + rowsPerPage);
-
-  // sorting function
-  const handleSort = (field) => {
-    let newDirection = "asc";
-    if (sortField === field && direction === "asc") {
-      newDirection = "desc";
-    }
-
-    const sortedData = [...daata].sort((a, b) => {
-      if (a[field] < b[field]) return newDirection === "asc" ? -1 : 1;
-      if (a[field] > b[field]) return newDirection === "asc" ? 1 : -1;
-      return 0;
-    });
-
-    setSortField(field);
-    setDirection(newDirection);
-    setDaata(sortedData);
-  };
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axiosInstance.get("/college/get-all");
-        setUsers(response.data);
+        if (response.data.status && response.data.data.content) {
+        
+          const transformedData = response.data.data.content.map(college => ({
+            CollegeName: college.name || "N/A",
+            Email: college.email || "N/A",
+            phone: college.phone || "N/A",
+            Address: college.address || "N/A",
+            Status: <span className="bg-amber-500 px-3 py-2 rounded-4xl text-white">pending.....</span>,
+            Action: <button className="rounded py-2 px-3 bg-blue-600 text-white cursor-pointer">Approved</button>
+          }));
+          setApiData(transformedData);
+          setDaata(transformedData);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -75,7 +42,53 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   }, []);
 
 
- 
+  const tableData = apiData.length > 0 ? apiData : daata;
+
+
+  let filterData = [];
+  try {
+    const columnsToUse = columns.length > 0 ? columns : 
+                         tableData.length > 0 ? Object.keys(tableData[0]) : [];
+
+    filterData = tableData.filter((item) => {
+      return Object.values(item).some(val => 
+        String(val).toLowerCase().includes(search.toLowerCase())
+      );
+    });
+  } catch (error) {
+    console.error("Error filtering data:", error);
+    filterData = [];
+  }
+
+  // Pagination logic
+  const totalPages = Math.ceil(filterData.length / rowsPerPage);
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const paginatedData = filterData.slice(startIndex, startIndex + rowsPerPage);
+
+  // Sorting function
+  const handleSort = (field) => {
+    let newDirection = "asc";
+    if (sortField === field && direction === "asc") {
+      newDirection = "desc";
+    }
+    const sortedData = [...tableData].sort((a, b) => {
+      if (a[field] < b[field]) return newDirection === "asc" ? -1 : 1;
+      if (a[field] > b[field]) return newDirection === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    setSortField(field);
+    setDirection(newDirection);
+    setDaata(sortedData);
+  };
+
+
+  const displayColumns = columns.length > 0 ? columns : 
+                        tableData.length > 0 ? Object.keys(tableData[0]) : [];
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div id="container-table">
@@ -85,7 +98,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
           type="text"
           className="border-2 rounded-md"
           value={search}
-          placeholder="Search Name or Course"
+          placeholder="Search..."
           onChange={(e) => {
             setSearch(e.target.value);
             setCurrentPage(1);
@@ -94,16 +107,16 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
       </div>
 
       <div id="table">
-        {columns.length === 0 || data.length === 0 ? (
+        {displayColumns.length === 0 || tableData.length === 0 ? (
           <p className="text-red-500">No data available</p>
         ) : (
           <>
             <table border="1">
               <thead>
                 <tr>
-                  {columns.map((col) => (
+                  {displayColumns.map((col) => (
                     <th key={col} onClick={() => handleSort(col)} style={{ cursor: "pointer" }}>
-                      {col} {sortField === col ? (direction === "asc" ? <span id="Table-icon"><LuChevronsUpDown /></span>: <span id="Table-icon"><LuChevronsUpDown /></span>) : ""}
+                      {col} {sortField === col && <span id="Table-icon"><LuChevronsUpDown /></span>}
                     </th>
                   ))}
                 </tr>
@@ -111,7 +124,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
               <tbody>
                 {paginatedData.map((row, index) => (
                   <tr key={index}>
-                    {columns.map((col) => (
+                    {displayColumns.map((col) => (
                       <td id="Table-data" key={col}>{row[col] ?? "N/A"}</td>
                     ))}
                   </tr>
@@ -119,30 +132,32 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
               </tbody>
             </table>
 
+            {totalPages > 1 && (
+              <div className="pagination">
+                <button
+                  id="pagination-btn"
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                >
+                  Prev
+                </button>
+
+                <span>
+                  Page {currentPage} of {totalPages}
+                </span>
+
+                <button
+                  id="pagination-btn"
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>
-            <div className="pagination">
-              <button
-                id="pagination-btn"
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-              >
-                Prev
-              </button>
-
-              <span>
-                Page {currentPage} of {totalPages}
-              </span>
-
-              <button
-                id="pagination-btn"
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </button>
-            </div>
     </div>
   );
 };

@@ -39,7 +39,7 @@ function App() {
             <Route path="/table" element={<Table/>} />
             <Route path="/course" element={<Course/>} />
             <Route path="/Board" element={<BoardList/>} />
-            <Route path="/Addboard" element={<AddBoard/>} />  
+            <Route path="/Addboard" element={<AddBoard/>} />
           <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>
       </BrowserRouter>
