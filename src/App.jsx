@@ -18,9 +18,9 @@ import ResetPassword from './Components/Auth/resetPassword'
 import Table from './Components/Table/Table'
 import Course from './Components/Education-management/Course/Course'
 import axiosInstance from "./Components/Intercepter/axiosInstance";
-import { useEffect, useState } from "react";
 import AddBoard from "./Components/Education-management/Board/addBoard";
 import { BoardList } from "./Components/Education-management/Board/BoardList/BoardList";
+import TestSignUp from "./Components/Auth/TestSignUp";
 
 function App() {
 
@@ -30,8 +30,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          
-          
             <Route path="/sign-up" element={<Reset/>} />
             <Route path="/" element={<Dash/>} />
             <Route path="/otp" element={<OTP/>} />
@@ -39,7 +37,8 @@ function App() {
             <Route path="/table" element={<Table/>} />
             <Route path="/course" element={<Course/>} />
             <Route path="/Board" element={<BoardList/>} />
-            <Route path="/Addboard" element={<AddBoard/>} />  
+            <Route path="/Addboard" element={<AddBoard/>} />
+            <Route path="/Test" element={<TestSignUp/>} />
           <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>
       </BrowserRouter>
