@@ -9,7 +9,11 @@ const API_ENDPOINTS = {
   COLLEGE: `/college/get-all`, 
   BOARD: `/board`, 
   TYPES: `board/types`,
-  GETALL: `/college/get-all`
+  GETALL: `/college/get-all`,
+  DISTRICTS: ``,
+  PROVINCES: `/location/province`,
+  MUNICIPALIATY: ``,
+  WARD: ``
 
   
 }

@@ -25,32 +25,6 @@ export const otpcode = (formData) => API.post(API_ENDPOINTS.OTP, formData);
 export const resetPassword = () => API.post(API_ENDPOINTS.RESETPASSWORD);
 
 export const college = (formData) => API.get(API_ENDPOINTS.COLLEGE, formData);
-
-// export const board = (token, data) => {
-//   return API.post(API_ENDPOINTS.BOARD, data, {
-//       headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//       },
-
-//   });
-  
-// }
-
-// export const board2 = (token, data) => {
-//   return API.get(API_ENDPOINTS.BOARD, data, {
-//       headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//       },
-
-//   });
-// }
-
-
 export const types = () => API.get(API_ENDPOINTS.TYPES);
-// export const getall = () => API.get(API_ENDPOINTS.GETALL);
-
-
 export default API;
 
