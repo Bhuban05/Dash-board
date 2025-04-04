@@ -12,6 +12,7 @@ import AddBoard from "./Components/Education-management/Board/addBoard";
 import { BoardList } from "./Components/Education-management/Board/BoardList/BoardList";
 import SignUp from "./Components/Auth/SignUp";
 import CollegeManage from "./Components/Education-management/College-management/CollegeManage";
+import { ApiTable } from "./Components/Table/ApiTable";
 
 
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/course" element={<Course/>} />
             <Route path="/Board" element={<BoardList/>} />
             <Route path="/Addboard" element={<AddBoard/>} />
+            <Route path="/apiTable" element={<ApiTable/>} />
             <Route path="/college-manage" element={<CollegeManage/>} />
             <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>

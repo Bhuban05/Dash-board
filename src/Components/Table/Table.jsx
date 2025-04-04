@@ -1,49 +1,14 @@
 import "./Table.css";
-import { useState,useEffect } from "react";
-import { LuChevronsUpDown } from "react-icons/lu";
+import { useState } from "react";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
-  const [search, setSearch] = useState(""); 
+  const [search, setSearch] = useState(""); // Filtering useState
 
-  const [currentPage, setCurrentPage] = useState(1); 
+  const [currentPage, setCurrentPage] = useState(1); // Pagination useState
 
-  const [daata, setDaata] = useState([...data]); 
+  const [daata, setDaata] = useState([...data]); // Sorting useState
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
-  const [loading, setLoading] = useState(true);
-  const [apiData, setApiData] = useState([]);
-
- 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get("/college/get-all");
-        if (response.data.status && response.data.data.content) {
-        
-          const transformedData = response.data.data.content.map(college => ({
-            CollegeName: college.name || "N/A",
-            Email: college.email || "N/A",
-            phone: college.phone || "N/A",
-            Address: college.address || "N/A",
-            Status: <span className="bg-amber-500 px-3 py-2 rounded-4xl text-white">pending.....</span>,
-            Action: <button className="rounded py-2 px-3 bg-blue-600 text-white cursor-pointer">Approved</button>
-          }));
-          setApiData(transformedData);
-          setDaata(transformedData);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-  const tableData = apiData.length > 0 ? apiData : daata;
-
 
   // filtering logic
   let filterData = [];
@@ -57,7 +22,8 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     filterData = daata.filter((datas) => {
       const name = datas?.Name?.toLowerCase() || "";
       const course = datas?.Course?.toLowerCase() || "";
-      return name.includes(search.toLowerCase()) || course.includes(search.toLowerCase());
+      const product = datas?.Product?.toLowerCase() || "";
+      return name.includes(search.toLowerCase()) || course.includes(search.toLowerCase()) || product.includes(search.toLowerCase());
     });
   } catch (error) {
     console.error("Error filtering data:", error);
@@ -75,6 +41,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     if (sortField === field && direction === "asc") {
       newDirection = "desc";
     }
+
     const sortedData = [...daata].sort((a, b) => {
       if (a[field] < b[field]) return newDirection === "asc" ? -1 : 1;
       if (a[field] > b[field]) return newDirection === "asc" ? 1 : -1;
@@ -89,7 +56,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   return (
     <div id="container-table">
       <div id="filter">
-        <label className="mr-0.5" id="filter-search">Search: </label>
+        <label className="mr-0.5" id="filter-search">Search </label>
         <input
           type="text"
           className="border-2 rounded-md"
@@ -112,7 +79,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
                 <tr>
                   {columns.map((col) => (
                     <th key={col} onClick={() => handleSort(col)} style={{ cursor: "pointer" }}>
-                      {col} {sortField === col ? (direction === "asc" ? <span id="Table-icon"><LuChevronsUpDown /></span>: <span id="Table-icon"><LuChevronsUpDown /></span>) : ""}
+                      {col} {sortField === col ? (direction === "asc" ? "🔼" : "🔽") : ""}
                     </th>
                   ))}
                 </tr>
@@ -121,7 +88,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
                 {paginatedData.map((row, index) => (
                   <tr key={index}>
                     {columns.map((col) => (
-                      <td id="Table-data" key={col}>{row[col] ?? "N/A"}</td>
+                      <td key={col}>{row[col] ?? "N/A"}</td>
                     ))}
                   </tr>
                 ))}
