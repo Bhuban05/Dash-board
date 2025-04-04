@@ -1,11 +1,13 @@
 import "./Table.css";
-import { useState, useEffect } from "react";
+import { useState,useEffect } from "react";
 import { LuChevronsUpDown } from "react-icons/lu";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
-  const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [daata, setDaata] = useState([...data]);
+  const [search, setSearch] = useState(""); 
+
+  const [currentPage, setCurrentPage] = useState(1); 
+
+  const [daata, setDaata] = useState([...data]); 
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get("/college/get-al");
+        const response = await axiosInstance.get("/college/get-all");
         if (response.data.status && response.data.data.content) {
         
           const transformedData = response.data.data.content.map(college => ({
@@ -38,6 +40,9 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
 
     fetchData();
   }, []);
+
+
+  const tableData = apiData.length > 0 ? apiData : daata;
 
 
   // filtering logic
