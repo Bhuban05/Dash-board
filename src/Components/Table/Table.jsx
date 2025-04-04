@@ -1,13 +1,13 @@
-import axios from "axios";
 import "./Table.css";
-import { useEffect, useState } from "react";
+import { useState,useEffect } from "react";
 import { LuChevronsUpDown } from "react-icons/lu";
-import axiosInstance from "../Intercepter/axiosInstance";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
-  const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [daata, setDaata] = useState([...data]);
+  const [search, setSearch] = useState(""); 
+
+  const [currentPage, setCurrentPage] = useState(1); 
+
+  const [daata, setDaata] = useState([...data]); 
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get("/college/get-al");
+        const response = await axiosInstance.get("/college/get-all");
         if (response.data.status && response.data.data.content) {
         
           const transformedData = response.data.data.content.map(college => ({
@@ -45,33 +45,37 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   const tableData = apiData.length > 0 ? apiData : daata;
 
 
+  // filtering logic
   let filterData = [];
   try {
-    const columnsToUse = columns.length > 0 ? columns : 
-                         tableData.length > 0 ? Object.keys(tableData[0]) : [];
+    if (!Array.isArray(data)) throw new Error("Invalid data format. Expected an array.");
 
-    filterData = tableData.filter((item) => {
-      return Object.values(item).some(val => 
-        String(val).toLowerCase().includes(search.toLowerCase())
-      );
+    if (!Array.isArray(columns) || columns.length === 0) {
+      columns = data.length > 0 ? Object.keys(data[0]) : [];
+    }
+
+    filterData = daata.filter((datas) => {
+      const name = datas?.Name?.toLowerCase() || "";
+      const course = datas?.Course?.toLowerCase() || "";
+      return name.includes(search.toLowerCase()) || course.includes(search.toLowerCase());
     });
   } catch (error) {
     console.error("Error filtering data:", error);
     filterData = [];
   }
 
-  // Pagination logic
+  // pagination logic
   const totalPages = Math.ceil(filterData.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const paginatedData = filterData.slice(startIndex, startIndex + rowsPerPage);
 
-  // Sorting function
+  // sorting function
   const handleSort = (field) => {
     let newDirection = "asc";
     if (sortField === field && direction === "asc") {
       newDirection = "desc";
     }
-    const sortedData = [...tableData].sort((a, b) => {
+    const sortedData = [...daata].sort((a, b) => {
       if (a[field] < b[field]) return newDirection === "asc" ? -1 : 1;
       if (a[field] > b[field]) return newDirection === "asc" ? 1 : -1;
       return 0;
@@ -82,14 +86,6 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     setDaata(sortedData);
   };
 
-
-  const displayColumns = columns.length > 0 ? columns : 
-                        tableData.length > 0 ? Object.keys(tableData[0]) : [];
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div id="container-table">
       <div id="filter">
@@ -98,7 +94,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
           type="text"
           className="border-2 rounded-md"
           value={search}
-          placeholder="Search..."
+          placeholder="Search Name or Course"
           onChange={(e) => {
             setSearch(e.target.value);
             setCurrentPage(1);
@@ -107,16 +103,16 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
       </div>
 
       <div id="table">
-        {displayColumns.length === 0 || tableData.length === 0 ? (
+        {columns.length === 0 || data.length === 0 ? (
           <p className="text-red-500">No data available</p>
         ) : (
           <>
             <table border="1">
               <thead>
                 <tr>
-                  {displayColumns.map((col) => (
+                  {columns.map((col) => (
                     <th key={col} onClick={() => handleSort(col)} style={{ cursor: "pointer" }}>
-                      {col} {sortField === col && <span id="Table-icon"><LuChevronsUpDown /></span>}
+                      {col} {sortField === col ? (direction === "asc" ? <span id="Table-icon"><LuChevronsUpDown /></span>: <span id="Table-icon"><LuChevronsUpDown /></span>) : ""}
                     </th>
                   ))}
                 </tr>
@@ -124,7 +120,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
               <tbody>
                 {paginatedData.map((row, index) => (
                   <tr key={index}>
-                    {displayColumns.map((col) => (
+                    {columns.map((col) => (
                       <td id="Table-data" key={col}>{row[col] ?? "N/A"}</td>
                     ))}
                   </tr>
@@ -132,32 +128,30 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
               </tbody>
             </table>
 
-            {totalPages > 1 && (
-              <div className="pagination">
-                <button
-                  id="pagination-btn"
-                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                  disabled={currentPage === 1}
-                >
-                  Prev
-                </button>
-
-                <span>
-                  Page {currentPage} of {totalPages}
-                </span>
-
-                <button
-                  id="pagination-btn"
-                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-              </div>
-            )}
           </>
         )}
       </div>
+            <div className="pagination">
+              <button
+                id="pagination-btn"
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+              >
+                Prev
+              </button>
+
+              <span>
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <button
+                id="pagination-btn"
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
     </div>
   );
 };

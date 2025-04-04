@@ -10,6 +10,11 @@ import { motion } from "framer-motion";
 function Navbar() {
   const [open, setOpen] = useState(false);
   const [visibal, setVisibal] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 100);
+  }, []);
+
   const dropdownRef = useRef(null);
 
   const Menus = [
@@ -80,18 +85,19 @@ function Navbar() {
       </nav>
 
       <div
-        id="sideBar"
-        style={{
-          transform: visibal ? "translateX(0)" : "translateX(-100%)",
-          transition: "transform 0.5s ease-in-out",
-          position: "fixed",
-          left: 0,
-          top: 0,
-          height: "100vh",
-          width: "15%",
-        }}
+        className={`sidebar ${visibal ? "active" : ""}`}
+        // style={{
+        //   transform: visibal ? "translateX(0)" : "translateX(-100%)",
+        //   transition: "transform 0.5s ease-in-out",
+        //   position: "fixed",
+        //   left: 0,
+        //   top: 0,
+        //   height: "100vh",
+        //   width: "15%",
+        //   willChange: "transform",
+        // }}
       >
-        {visibal && <Sidebar />}
+        <Sidebar />
       </div>
     </>
   );

@@ -5,9 +5,8 @@ const axiosInstance = axios.create({
   baseURL: "http://192.168.0.101:8282/api/v1", 
   headers: {
     "Content-Type": "application/json",
-  },
+  },                
 });
-
 
 axiosInstance.interceptors.request.use(
   (config) => {

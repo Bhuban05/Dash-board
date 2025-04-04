@@ -14,6 +14,7 @@ import SignUp from "./Components/Auth/SignUp";
 
 
 
+
 function App() {
 
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/course" element={<Course/>} />
             <Route path="/Board" element={<BoardList/>} />
             <Route path="/Addboard" element={<AddBoard/>} />
+            <Route path="/college-manage" element={<coll/>} />
             <Route path="/reset-password" element={<ResetPassword/>} />
         </Routes>
       </BrowserRouter>
