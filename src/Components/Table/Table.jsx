@@ -1,15 +1,44 @@
 import "./Table.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LuChevronsUpDown } from "react-icons/lu";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
-  const [search, setSearch] = useState(""); // Filtering useState
-
-  const [currentPage, setCurrentPage] = useState(1); // Pagination useState
-
-  const [daata, setDaata] = useState([...data]); // Sorting useState
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [daata, setDaata] = useState([...data]);
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
+  const [loading, setLoading] = useState(true);
+  const [apiData, setApiData] = useState([]);
+
+ 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/college/get-al");
+        if (response.data.status && response.data.data.content) {
+        
+          const transformedData = response.data.data.content.map(college => ({
+            CollegeName: college.name || "N/A",
+            Email: college.email || "N/A",
+            phone: college.phone || "N/A",
+            Address: college.address || "N/A",
+            Status: <span className="bg-amber-500 px-3 py-2 rounded-4xl text-white">pending.....</span>,
+            Action: <button className="rounded py-2 px-3 bg-blue-600 text-white cursor-pointer">Approved</button>
+          }));
+          setApiData(transformedData);
+          setDaata(transformedData);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   // filtering logic
   let filterData = [];
