@@ -10,10 +10,10 @@ const API_ENDPOINTS = {
   BOARD: `/board`, 
   TYPES: `board/types`,
   GETALL: `/college/get-all`,
-  DISTRICTS: ``,
+  DISTRICTS: `/location/district/{provinceId}`,
   PROVINCES: `/location/province`,
-  MUNICIPALIATY: ``,
-  WARD: ``
+  MUNICIPALIATY: `/location/municipality/{municiplityId}`,
+  WARD: `/location/ward/{municipalityId}`
 
   
 }

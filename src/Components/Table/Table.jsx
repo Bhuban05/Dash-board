@@ -17,7 +17,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get("/college/get-all");
+        const response = await axiosInstance.get("/college/get-al");
         if (response.data.status && response.data.data.content) {
         
           const transformedData = response.data.data.content.map(college => ({
