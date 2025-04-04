@@ -67,12 +67,12 @@ export const Sidebar = () => {
       ],
     },
     {
-      title: "college Management",
+      title: "College Management",
       icon: <FontAwesomeIcon icon={faBarChart} />,
 
       drop:[
 
-        {title: "college manage", path: "/college-manage"  }
+        {title: "College manage", path: "/college-manage"  }
       ]
      
     },

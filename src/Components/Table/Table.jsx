@@ -13,35 +13,6 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState([]);
 
- 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get("/college/get-all");
-        if (response.data.status && response.data.data.content) {
-        
-          const transformedData = response.data.data.content.map(college => ({
-            CollegeName: college.name || "N/A",
-            Email: college.email || "N/A",
-            phone: college.phone || "N/A",
-            Address: college.address || "N/A",
-            Status: <span className="bg-amber-500 px-3 py-2 rounded-4xl text-white">pending.....</span>,
-            Action: <button className="rounded py-2 px-3 bg-blue-600 text-white cursor-pointer">Approved</button>
-          }));
-          setApiData(transformedData);
-          setDaata(transformedData);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
   const tableData = apiData.length > 0 ? apiData : daata;
 
 
