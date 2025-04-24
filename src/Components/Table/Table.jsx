@@ -9,8 +9,13 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   const [daata, setDaata] = useState([...data]); // Sorting useState
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
+  const [loading, setLoading] = useState(true);
+  const [apiData, setApiData] = useState([]);
 
-  // filtering logic
+  const tableData = apiData.length > 0 ? apiData : daata;
+
+
+ 
   let filterData = [];
   try {
     if (!Array.isArray(data)) throw new Error("Invalid data format. Expected an array.");
@@ -30,12 +35,11 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     filterData = [];
   }
 
-  // pagination logic
   const totalPages = Math.ceil(filterData.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const paginatedData = filterData.slice(startIndex, startIndex + rowsPerPage);
 
-  // sorting function
+
   const handleSort = (field) => {
     let newDirection = "asc";
     if (sortField === field && direction === "asc") {

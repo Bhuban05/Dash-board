@@ -54,7 +54,6 @@ function OTP() {
       const email = localStorage.getItem("email"); 
       const otpString = otp; 
 
-     
       const response = await otpcode({ otp: otpString, email });
 
       if (response.status === 200 && response.data.status === true) {

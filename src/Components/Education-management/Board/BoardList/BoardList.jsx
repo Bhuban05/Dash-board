@@ -48,7 +48,6 @@ export const BoardList = () => {
         setMenuVisible(menuVisible === id ? null : id);
     };
 
- 
     const nextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
@@ -65,14 +64,14 @@ export const BoardList = () => {
     
     useEffect(() => {
         function handleClickOutside(event) {
-          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setOpen(false);
-          }
+        }
         }
     
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-      }, []);
+    }, []);
 
     return (
         <>

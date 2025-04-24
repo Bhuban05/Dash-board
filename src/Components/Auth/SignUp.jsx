@@ -238,7 +238,7 @@ const SignUp = () => {
       const formDataToSend = new FormData();
       formDataToSend.append("collegeName", formData.collegeName);
       formDataToSend.append("collegeAddress", formData.collegeAddress);
-      formDataToSend.append("email", formData.email);
+      formDataToSend.append("adminEmail", formData.email);
       formDataToSend.append("collegePhone", formData.collegePhone);
       formDataToSend.append("levels", formData.levels);
       formDataToSend.append("province", formData.province);
@@ -255,7 +255,7 @@ const SignUp = () => {
         toast.success("Registration successful! Please verify your email");
       }
       
-      const response = await fetch("http://192.168.0.101:8282/api/v1//college/request", {
+      const response = await fetch("http://192.168.0.101:8282/api/v1/college/request", {
         method: "POST",
         body: formDataToSend
       });
