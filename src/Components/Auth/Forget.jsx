@@ -30,7 +30,7 @@ function Forget() {
   };
 
   return (
-    <section className="h-screen flex items-center justify-center w-full">
+    <section className="h-screen flex items-center justify-center w-full  bg-gray-100">
       <div className="h-130 container px-6 py-12 w-full max-w-4xl bg-white rounded-lg flex flex-wrap">
         <div className="hidden lg:block w-1/2 rounded-2xl bg-white">
           <img src={forget} className="rounded-2xl w-full" alt="Forgot Password" />

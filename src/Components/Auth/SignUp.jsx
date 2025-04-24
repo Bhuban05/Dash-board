@@ -255,7 +255,7 @@ const SignUp = () => {
         toast.success("Registration successful! Please verify your email");
       }
       
-      const response = await fetch("http://192.168.0.101:8282/api/v1/college/request", {
+      const response = await fetch("http://192.168.0.103:8282/api/v1/college/request", {
         method: "POST",
         body: formDataToSend
       });
@@ -283,8 +283,8 @@ const SignUp = () => {
   
 
   return (
-    <div className="min-h-screen flex justify-center items-center px-2.5 font-poppins">
-      <div className="w-full max-w-2xl bg-white p-6 md:p-8 rounded-lg shadow-[13px_19px_36px_-9px_rgba(59,_130,_246,_0.5)]">
+    <div className="min-h-screen flex justify-center items-center px-2.5 font-poppins  bg-gray-100">
+      <div className="w-full max-w-2xl bg-white p-6 md:p-8 rounded-lg shadow-2xl">
         <div className="relative pb-1 items-center font-bold text-3xl justify-center flex">
           Sign Up
         </div>
@@ -491,6 +491,7 @@ const SignUp = () => {
               {loading.form ? "Please wait..." : "Sign Up"}
             </button>
           </div>
+      
         </div>
       </div>
     </div>

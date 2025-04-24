@@ -12,7 +12,7 @@ function Navbar() {
   const [visibal, setVisibal] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setVisible(true), 100);
+    setTimeout(() => setVisibal(true), 100);
   }, []);
 
   const dropdownRef = useRef(null);

@@ -14,8 +14,8 @@ export const BoardList = () => {
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1); 
     const rowsPerPage = 1; 
-      const [open, setOpen] = useState(false);
-      const dropdownRef = useRef(null);
+    const [open, setOpen] = useState(false);
+    const dropdownRef = useRef(null);
     
 
     useEffect(() => {
