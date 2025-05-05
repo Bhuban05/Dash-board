@@ -40,7 +40,7 @@ function App() {
             <Route path="/college-manage" element={<CollegeManage/>} />
             <Route path="/reset-password" element={<ResetPassword/>} />
             <Route path="/course-list" element={<CourseList/>} />
-            <Route path="/details" element={<Details/>} />
+            <Route path="/details/:id" element={<Details/>} />
 
         </Routes>
       </BrowserRouter>

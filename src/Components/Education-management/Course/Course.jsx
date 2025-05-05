@@ -103,7 +103,6 @@ const Course = () => {
     if (!formData.level) {
       newErrors.level = "Level is required";
     }
-    
 
     if (!formData.board) {
       newErrors.board = "Board Type is required";
@@ -152,8 +151,6 @@ const Course = () => {
       });
 
       if (response.data.message) {
-       
-
         toast.success("Course created successfully!");
         navigate("/course-list");
       } else {
@@ -190,7 +187,7 @@ const Course = () => {
 
         const boardResponse = await axiosInstance.get("/board");
         const boardData = boardResponse.data?.data?.content;
-        
+
         if (boardResponse.data.status && Array.isArray(boardData)) {
           setBoardType(boardData);
         } else {
@@ -236,84 +233,83 @@ const Course = () => {
                   } focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200`}
                 />
                 {errors.name && (
-                  <p name="mt-1 text-sm text-red-600">
-                    {errors.name}
-                  </p>
+                  <p name="mt-1 text-sm text-red-600">{errors.name}</p>
                 )}
               </div>
 
               <div>
-  <label className="block text-sm font-medium text-gray-700 mb-1">
-    Discipline <span className="text-blue-500">*</span>
-  </label>
-  <Select
-    isMulti
-    options={disciplines.map((d) => ({ value: d, label: d }))}
-    value={formData.discipline.map((d) => ({
-      value: d,
-      label: d,
-    }))}
-    onChange={(selected) =>
-      setFormData((prev) => ({
-        ...prev,
-        discipline: selected ? selected.map((option) => option.value) : [],
-      }))
-    }
-    className={`basic-multi-select ${
-      errors.discipline ? "border-red-500 rounded-lg" : ""
-    }`}
-    classNamePrefix="select"
-    placeholder="Select disciplines..."
-    closeMenuOnSelect={false}
-    isSearchable
-    noOptionsMessage={() => "No disciplines found"}
-    styles={{
-      control: (base) => ({
-        ...base,
-        minHeight: '44px',
-        borderColor: errors.discipline ? '#ef4444' : '#d1d5db',
-        '&:hover': {
-          borderColor: errors.discipline ? '#ef4444' : '#9ca3af'
-        },
-        boxShadow: 'none'
-      }),
-      menu: (base) => ({
-        ...base,
-        zIndex: 9999
-      })
-    }}
-  />
-  {errors.discipline && (
-    <p className="mt-1 text-sm text-red-600">{errors.discipline}</p>
-  )}
-</div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Discipline <span className="text-blue-500">*</span>
+                </label>
+                <Select
+                  isMulti
+                  options={disciplines.map((d) => ({ value: d, label: d }))}
+                  value={formData.discipline.map((d) => ({
+                    value: d,
+                    label: d,
+                  }))}
+                  onChange={(selected) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      discipline: selected
+                        ? selected.map((option) => option.value)
+                        : [],
+                    }))
+                  }
+                  className={`basic-multi-select ${
+                    errors.discipline ? "border-red-500 rounded-lg" : ""
+                  }`}
+                  classNamePrefix="select"
+                  placeholder="Select disciplines..."
+                  closeMenuOnSelect={false}
+                  isSearchable
+                  noOptionsMessage={() => "No disciplines found"}
+                  styles={{
+                    control: (base) => ({
+                      ...base,
+                      minHeight: "44px",
+                      borderColor: errors.discipline ? "#ef4444" : "#d1d5db",
+                      "&:hover": {
+                        borderColor: errors.discipline ? "#ef4444" : "#9ca3af",
+                      },
+                      boxShadow: "none",
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      zIndex: 9999,
+                    }),
+                  }}
+                />
+                {errors.discipline && (
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.discipline}
+                  </p>
+                )}
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   levels <span className="text-blue-500">*</span>
                 </label>
-                
-<select
-  name="level"
-  value={formData.level}  
-  onChange={handleChange}
-  className={`w-full px-4 py-2.5 rounded-lg border ${
-    errors.level ? "border-red-500" : "border-gray-300"  
-  } focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200`}
->
-  <option value="">Select Levels</option>
-  {Array.isArray(educationLevels) &&
-    educationLevels.map((level, index) => (
-      <option key={index} value={level}>
-        {level}
-      </option>
-    ))}
-</select>
-{errors.level && ( 
-  <p className="mt-1 text-sm text-red-600">
-    {errors.level}
-  </p>
-)}
-                
+
+                <select
+                  name="level"
+                  value={formData.level}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2.5 rounded-lg border ${
+                    errors.level ? "border-red-500" : "border-gray-300"
+                  } focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200`}
+                >
+                  <option value="">Select Levels</option>
+                  {Array.isArray(educationLevels) &&
+                    educationLevels.map((level, index) => (
+                      <option key={index} value={level}>
+                        {level}
+                      </option>
+                    ))}
+                </select>
+                {errors.level && (
+                  <p className="mt-1 text-sm text-red-600">{errors.level}</p>
+                )}
               </div>
 
               <div>
@@ -337,7 +333,7 @@ const Course = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Board  <span className="text-blue-500">*</span>
+                  Board <span className="text-blue-500">*</span>
                 </label>
                 <select
                   name="board"
@@ -355,9 +351,7 @@ const Course = () => {
                   ))}
                 </select>
                 {errors.board && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.board}
-                  </p>
+                  <p className="mt-1 text-sm text-red-600">{errors.board}</p>
                 )}
               </div>
 
