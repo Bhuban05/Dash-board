@@ -12,7 +12,7 @@ function Dash() {
     <div>
       <Navbar/>
         <div className='h-screen flex ' id='container'>
-            <StudentId/>
+            {/* <StudentId/> */}
             {/* <ApiTable/> */}
 </div>
 </div>
