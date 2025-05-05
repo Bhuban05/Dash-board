@@ -21,25 +21,46 @@ const Details = () => {
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
   const [form] = Form.useForm();
+  const [educationLevels, setEducationLevels] = useState([]);
+  const [disciplines, setDisciplines] = useState([]);
+  const [board, setBoardType] = useState([]);
 
   useEffect(() => {
-    if (!id || id === 'null' || id === 'undefined') {
-      setError("Course ID is missing or invalid in the URL. Please go back and try again.");
-      setLoading(false);
-      return;
-    }
+    const fetchAllData = async () => {
+      if (!id || id === 'null' || id === 'undefined') {
+        setError("Course ID is missing or invalid in the URL. Please go back and try again.");
+        setLoading(false);
+        return;
+      }
 
-    const fetchCourse = async () => {
       try {
-        const response = await axiosInstance.get(`/course/${id}`);
-        const course = response.data.data?.course;
+        setLoading(true);
 
+        
+        const [disciplinesRes, levelsRes, boardRes, courseRes] = await Promise.all([
+          axiosInstance.get("/course/disciplines"),
+          axiosInstance.get("/college/level"),
+          axiosInstance.get("/board"),
+          axiosInstance.get(`/course/${id}`)
+        ]);
+
+       
+        const disciplinesData = disciplinesRes.data.status ? disciplinesRes.data.data : [];
+        const levelsData = levelsRes.data.status ? levelsRes.data.data : [];
+        const boardDataRaw = boardRes.data?.data?.content;
+        const boardData = boardRes.data.status && Array.isArray(boardDataRaw) ? boardDataRaw : [];
+
+        const course = courseRes.data.data?.course;
         if (!course) {
           setError("Course not found.");
           return;
         }
 
+        setDisciplines(disciplinesData);
+        setEducationLevels(levelsData);
+        setBoardType(boardData);
         setCourseData(course);
+
         form.setFieldsValue({
           name: course.name,
           description: course.description,
@@ -49,13 +70,13 @@ const Details = () => {
           disciplines: course.disciplines
         });
       } catch (err) {
-        setError(err.response?.data?.error?.details || 'Failed to fetch course details');
+        setError(err.response?.data?.error?.details );
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCourse();
+    fetchAllData();
   }, [id, form]);
 
   const handleUpdate = async () => {
@@ -75,15 +96,15 @@ const Details = () => {
     }
   };
 
-  // const handleDelete = async () => {
-  //   try {
-  //     await axiosInstance.delete(`/course/${id}`);
-  //     message.success('Course deleted successfully');
-  //     navigate('/course-list');
-  //   } catch (err) {
-  //     message.error(err.response?.data?.message || 'Failed to delete course');
-  //   }
-  // };
+  const handleDelete = async () => {
+    try {
+      await axiosInstance.delete(`/course/${id}`);
+      message.success('Course deleted successfully');
+      navigate('/course-list');
+    } catch (err) {
+      message.error(err.response?.data?.message || 'Failed to delete course');
+    }
+  };
 
   const confirmDelete = () => {
     Modal.confirm({
@@ -94,6 +115,7 @@ const Details = () => {
       cancelText: 'No',
     });
   };
+
 
   if (loading) {
     return (
@@ -116,6 +138,7 @@ const Details = () => {
     );
   }
 
+  
   if (!courseData) {
     return (
       <div className="p-8 max-w-4xl mx-auto text-center">
@@ -130,13 +153,14 @@ const Details = () => {
   }
 
   const course = courseData;
+  
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-white rounded-xl shadow-xl mt-20 overflow-hidden">
-      <div className="flex justify-between items-center mb-4">
+    <div className="p-6 max-w-4xl mx-auto bg-white rounded-xl shadow-xl mt-20 overflow-hidden border border-gray-300">
+      <div className="flex justify-between   items-center mb-4">
         <Title level={2}>{editing ? 'Edit Course' : course.name}</Title>
         {!editing ? (
-          <div className="flex gap-2">
+          <div className="flex gap-2 ">
             <Button type="primary" icon={<EditOutlined />} onClick={() => setEditing(true)}>
               Edit
             </Button>
@@ -174,16 +198,14 @@ const Details = () => {
               <Form.Item
                 name="name"
                 label="Course Name"
-                rules={[{ required: true, message: 'Please input course name' }]}
-              >
+                rules={[{ required: true, message: 'Please input course name' }]}>
                 <Input />
               </Form.Item>
 
               <Form.Item
                 name="description"
                 label="Description"
-                rules={[{ required: true, message: 'Please input course description' }]}
-              >
+                rules={[{ required: true, message: 'Please input course description' }]}>
                 <TextArea rows={6} />
               </Form.Item>
 
@@ -191,42 +213,42 @@ const Details = () => {
                 <Form.Item
                   name="duration"
                   label="Duration"
-                  rules={[{ required: true, message: 'Please input duration' }]}
-                >
+                  rules={[{ required: true, message: 'Please input duration' }]}>
                   <Input />
                 </Form.Item>
 
                 <Form.Item
                   name="level"
                   label="Level"
-                  rules={[{ required: true, message: 'Please select level' }]}
-                >
-                  {/* <Select>
-                    <Option value="PLUS_TWO">Plus Two</Option>
-                    <Option value="DIPLOMA">Diploma</Option>
-                    <Option value="UG">Undergraduate</Option>
-                    <Option value="PG">Postgraduate</Option>
-                  </Select> */}
+                  rules={[{ required: true, message: 'Please select level'}]}>
+                  <Select placeholder="Select level">
+                    {educationLevels.map((level, index) => (
+                      <Option key={index} value={level}>
+                        {level}
+                      </Option>
+                    ))}
+                  </Select>
                 </Form.Item>
 
                 <Form.Item
                   name="board"
                   label="Board"
-                  rules={[{ required: true, message: 'Please select board' }]}
-                >
-                  {/* <Select>
-                    <Option value={0}>CBSE</Option>
-                    <Option value={1}>STATE</Option>
-                    <Option value={2}>ICSE</Option>
-                  </Select> */}
+                  rules={[{ required: true, message: 'Please select board' }]}>
+                  <Select placeholder="Select board">
+                    {board.map((b, index) => (
+                 <Option key={b.id} value={b.id}>{b.name}</Option>
+                    ))}
+                  </Select>
                 </Form.Item>
               </div>
 
               <Form.Item name="disciplines" label="Disciplines">
                 <Select mode="multiple" placeholder="Select disciplines">
-                  <Option value="SCIENCE_TECHNOLOGY">Science & Technology</Option>
-                  <Option value="COMMERCE">Commerce</Option>
-                  <Option value="ARTS">Arts</Option>
+                  {disciplines.map((discipline, index) => (
+                    <Option key={index} value={discipline}>
+                      {discipline}
+                    </Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Form>
@@ -240,7 +262,7 @@ const Details = () => {
                   <Text strong>{course.level}</Text>
                 </Tag>
                 <Tag icon={<BarsOutlined />} color="purple">
-                  <Text strong>{['CBSE', 'STATE', 'ICSE'][course.board]}</Text>
+                  <Text strong>{course.board} ||</Text>
                 </Tag>
               </div>
 
