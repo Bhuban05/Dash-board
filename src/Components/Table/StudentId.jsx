@@ -23,7 +23,9 @@ export default function StudentId() {
         { Id: "117", Name: "Harsh", Course: "BBA", Age: "20" },
         { Id: "118", Name: "Swati", Course: "BCA", Age: "23" },
         { Id: "119", Name: "Ankit", Course: "BBA", Age: "21" },
-        { Id: "120", Name: "Tanvi", Course: "BCA", Age: "22" }
+        { Id: "120", Name: "Tanvi", Course: "BCA", Age: "22" },
+        { Id: "120", Name: "Pemba", Course: "BCA", Age: "22" },
+        { Id: "120", Name: "Jenisha", Course: "BCA", Age: "22" },
 
     ]
 

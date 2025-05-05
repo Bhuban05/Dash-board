@@ -48,7 +48,6 @@ export const Sidebar = () => {
       icon: <FontAwesomeIcon icon={faPieChart} />,
       drop: [
         { title: "DashBoard", path: "/" },
-        { title: "Test Sign Up", path: "/test" },
         { title: "Project Management", path: "/project_management" },
         { title: "Social", path: "/social" },
         { title: "Travel Agency", path: "/travel_agency" },
@@ -72,7 +71,9 @@ export const Sidebar = () => {
 
       drop:[
 
-        {title: "College manage", path: "/college-manage"  }
+        {title: "College manage", path: "/college-manage"  },
+       
+
       ]
      
     },
@@ -84,6 +85,8 @@ export const Sidebar = () => {
         { title: "Board", path: "/Board"   },
 
         { title: "Course", path: "/Course" },
+
+        {title: "CollegeList", path: "/course-list"  },
       ],
     },
 

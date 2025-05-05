@@ -58,10 +58,10 @@ function Login() {
   };
 
   return (
-    <section className="h-screen flex items-center justify-center">
-      <div className="h-130 container px-6 py-2 w-full max-w-4xl bg-white rounded-lg flex flex-wrap">
+    <section className="h-screen  bg-gray-100  flex items-center justify-center">
+      <div className="h-130 container px-6 py-2 w-full max-w-4xl rounded-lg flex  flex-wrap">
         <div className="hidden lg:block w-1/2">
-          <img src={log} className="w-full h-full bg-white shadow-blue-200" alt="Login" />
+          <img src={log} className="w-full h-full bg-white " alt="Login" />
         </div>
 
         <div className="lg:w-1/2 px-6 bg-white">

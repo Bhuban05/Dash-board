@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { LuChevronsUpDown } from "react-icons/lu";
 import axiosInstance from "../../Intercepter/axiosInstance";
+import { toast } from "react-toastify";
 
 const CollegeManage = ({ columns = [], data = [], rowsPerPage = 5 }) => {
-  const [search, setSearch] = useState(""); 
-  const [currentPage, setCurrentPage] = useState(1); 
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
   const [loading, setLoading] = useState(true);
@@ -13,18 +14,37 @@ const CollegeManage = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get("http://192.168.0.101:8282/api/v1/college/get-all");
+        const response = await axiosInstance.get("http://192.168.0.103:8282/api/v1/college/get-all");
 
         if (response.data.status && response.data.data.content) {
-          console.log(response.data.data.content);
-          const transformedData = response.data.data.content.map(college => ({
-            CollegeName: college.collegeName || "N/A",
-            Email: college.contactEmail || "N/A",
-            Phone: college.phone || "N/A",
-            Address: college.address || "N/A",
-            Status: <span className="bg-amber-500 px-3 py-2 rounded-4xl text-white">Pending</span>,
-            Action: <button className="rounded py-2 px-3 bg-blue-600 text-white cursor-pointer">Approve</button>
-          }));
+          const transformedData = response.data.data.content.map((college) => {
+            const isApproved = college.approvalStatus === "APPROVED";
+          
+            return {
+              id: college.id,
+              CollegeName: college.collegeName || "N/A",
+              Email: college.contactEmail || "N/A",
+              Phone: college.phone || "N/A",
+              Address: college.address || "N/A",
+              Status: isApproved ? (
+                <span className="bg-green-500 px-3 py-2 rounded-4xl text-white">Approved</span>
+              ) : (
+                <span className="bg-amber-500 px-3 py-2 rounded-4xl text-white">Pending</span>
+              ),
+              Action: !isApproved ? (
+                <button
+                  className="rounded py-2 px-3 bg-blue-600 text-white cursor-pointer"
+                  onClick={() => handleApprove(college.id)}
+                >
+                  Approve
+                </button>
+              ) : (
+                null
+              ),
+              originalData: college
+            };
+          });
+          
           setApiData(transformedData);
         }
       } catch (error) {
@@ -39,31 +59,40 @@ const CollegeManage = ({ columns = [], data = [], rowsPerPage = 5 }) => {
 
   const handleApprove = async (collegeId) => {
     try {
-      
-      const response = await axiosInstance.put(`http://192.168.0.101:8282/api/v1/college/approve/${collegeId}`);
-  
+      const response = await axiosInstance.put(
+        `http://192.168.0.103:8282/api/v1/college/approve?collegeId=${collegeId}`
+      );
+
       if (response.data.status) {
-       
         setApiData((prevData) =>
           prevData.map((college) =>
             college.id === collegeId
-              ? { ...college, Status: <span className="bg-green-500 px-3 py-2 rounded-4xl text-white">Approved</span> }
+              ? {
+                  ...college,
+                  Status: (
+                    <span className="bg-green-500 px-3 py-2 rounded-4xl text-white">
+                      Approved
+                    </span>
+                  ),
+                  Action: null,
+                }
               : college
           )
         );
+        
+        toast.success("College approved successfully!")
       }
+     
     } catch (error) {
       console.error("Error approving college:", error);
+    toast.message("Error approving college")
     }
   };
-  
 
-  
   if (columns.length === 0 && apiData.length > 0) {
-    columns = Object.keys(apiData[0]);
+    columns = Object.keys(apiData[0]).filter(key => key !== "id" && key !== "originalData");
   }
 
-  // **Filtering Data**
   const filterData = apiData.filter((college) => {
     return (
       college.CollegeName.toLowerCase().includes(search.toLowerCase()) ||
@@ -72,12 +101,10 @@ const CollegeManage = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     );
   });
 
-  // **Pagination Logic**
   const totalPages = Math.ceil(filterData.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const paginatedData = filterData.slice(startIndex, startIndex + rowsPerPage);
 
-  // **Sorting Function**
   const handleSort = (field) => {
     let newDirection = direction === "asc" ? "desc" : "asc";
     const sortedData = [...apiData].sort((a, b) => {

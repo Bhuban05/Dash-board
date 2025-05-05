@@ -11,7 +11,11 @@ import AddBoard from "./Components/Education-management/Board/addBoard";
 import { BoardList } from "./Components/Education-management/Board/BoardList/BoardList";
 import SignUp from "./Components/Auth/SignUp";
 import CollegeManage from "./Components/Education-management/College-management/CollegeManage";
-//import { CollegeManage } from "./Components/Education-management/College-management/CollegeManage";
+import Course from "./Components/Education-management/Course/Course";
+import CourseList from "./Components/Education-management/Course/CourseList";
+import Details from "./Components/Education-management/Course/Details/viewDetails";
+
+
 
 
 
@@ -30,9 +34,12 @@ function App() {
             <Route path="/forget" element={<Forget/>} />
             <Route path="/Board" element={<BoardList/>} />
             <Route path="/Addboard" element={<AddBoard/>} />
-            {/* <Route path="/apiTable" element={<ApiTable/>} /> */}
+            <Route path="/course" element={<Course/>} />
             <Route path="/college-manage" element={<CollegeManage/>} />
             <Route path="/reset-password" element={<ResetPassword/>} />
+            <Route path="/course-list" element={<CourseList/>} />
+            <Route path="/details" element={<Details/>} />
+
         </Routes>
       </BrowserRouter>
     </>

@@ -13,7 +13,7 @@ function OTP() {
   const navigate = useNavigate();
 
   const handleChange = (index, value) => {
-    if (isNaN(value)) return; // Only allow numbers
+    if (isNaN(value)) return; 
 
     const newOtpValues = [...otpValues];
     newOtpValues[index] = value;
@@ -56,9 +56,10 @@ function OTP() {
 
       const response = await otpcode({ otp: otpString, email });
 
-      if (response.status === 200 && response.data.status === true) {
-        toast.success("OTP verified successfully!");
+      if (response.status === 20 && response.data.status === true) {
+       
         navigate("/login"); 
+        toast.success("OTP verified successfully!");
       } else {
         toast.error(response.data.message || "OTP verification failed.");
       }
@@ -69,7 +70,7 @@ function OTP() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
+    <div className="flex items-center justify-center min-h-screen p-4  bg-gray-100">
       <div className="relative flex flex-col md:flex-row bg-white rounded-2xl w-full max-w-4xl overflow-hidden h-130">
         <div className="flex flex-col items-center justify-center p-6 md:p-12 w-full md:w-1/2">
           <h2 className="mb-3 text-3xl md:text-4xl font-bold text-white">Login</h2>
