@@ -15,7 +15,6 @@ const API_ENDPOINTS = {
   MUNICIPALIATY: `/location/municipality/{municiplityId}`,
   WARD: `/location/ward/{municipalityId}`
 
-  
 }
 
 export default API_ENDPOINTS;

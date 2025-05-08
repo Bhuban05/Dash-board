@@ -153,7 +153,6 @@ const Details = () => {
   }
 
   const course = courseData;
-  
 
   return (
     <div className="p-6 max-w-4xl mx-auto bg-white rounded-xl shadow-xl mt-20 overflow-hidden border border-gray-300">

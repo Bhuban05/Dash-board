@@ -82,7 +82,6 @@ const CollegeManage = ({ columns = [], data = [], rowsPerPage = 5 }) => {
         
         toast.success("College approved successfully!")
       }
-     
     } catch (error) {
       console.error("Error approving college:", error);
     toast.message("Error approving college")
