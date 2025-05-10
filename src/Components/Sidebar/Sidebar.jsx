@@ -47,13 +47,13 @@ export const Sidebar = () => {
       title: "Home",
       icon: <FontAwesomeIcon icon={faPieChart} />,
       drop: [
-        { title: "DashBoard", path: "/dash" },
-        { title: "CRM", path: "/crm" },
+        { title: "DashBoard", path: "/" },
         { title: "Project Management", path: "/project_management" },
         { title: "Social", path: "/social" },
         { title: "Travel Agency", path: "/travel_agency" },
       ],
     },
+  
     {
       title: "Ecommerce",
       icon: <FontAwesomeIcon icon={faCartShopping} />,
@@ -65,14 +65,28 @@ export const Sidebar = () => {
         { title: "Travel Agency", path: "/travel_agency" },
       ],
     },
+    {
+      title: "College Management",
+      icon: <FontAwesomeIcon icon={faBarChart} />,
+
+      drop:[
+
+        {title: "College manage", path: "/college-manage"  },
+       
+
+      ]
+     
+    },
    
 {
       title: "Education",
       icon: <FontAwesomeIcon icon={faPieChart} />,
       drop: [
         { title: "Board", path: "/Board"   },
-    
+
         { title: "Course", path: "/Course" },
+
+        {title: "CollegeList", path: "/course-list"  },
       ],
     },
 
@@ -159,46 +173,6 @@ export const Sidebar = () => {
     },
   ];
 
-  const sideItem2 = [
-    {
-      title: "Starter",
-      icon: <FontAwesomeIcon icon={faCompass} />,
-    },
-    {
-      title: "Faq",
-      icon: <FontAwesomeIcon icon={faQuestionCircle} />,
-    },
-    {
-      title: "Landing",
-      icon: <FontAwesomeIcon icon={faGlobe} />,
-    },
-    {
-      title: "Pricing",
-      icon: <FontAwesomeIcon icon={faTag} />,
-    },
-    {
-      title: "Notification",
-      icon: <FontAwesomeIcon icon={faBell} />,
-    },
-    {
-      title: "Members",
-      icon: <FontAwesomeIcon icon={faPeopleLine} />,
-    },
-    {
-      title: "Timeline",
-      icon: <FontAwesomeIcon icon={faClock} />,
-    },
-    {
-      title: "Errors",
-      icon: <FontAwesomeIcon icon={faExclamationTriangle} />,
-    },
-   
-    {
-      title: "Layouts",
-      icon: <FontAwesomeIcon icon={faPieChart} />,
-    },
-   
-  ];
   return (
     <div id="side">
       <div id="Sidebar">
@@ -224,7 +198,7 @@ export const Sidebar = () => {
                   maxHeight: opened === index ? "200px" : "0px",
                   overflow: "hidden",
                   opacity: opened === index ? 1 : 0,
-                  transition: "max-height 400ms ease-in-out, opacity 0.5s ease-in-out"
+                  transition: opened === index ? "all 500ms ease-in, opacity 0.5 ease-in" : "all 500ms ease-out, opacity 0.5 ease-out"
 }}>
                 {item.drop && opened === index && (
                   <div className="dropdown">
@@ -238,35 +212,6 @@ export const Sidebar = () => {
           ))}
         </ul>
 
-        <ul>
-          <span id="spanSidebar">Pages</span>
-          {sideItem2.map((item, index) => (
-            <div key={index} className="sideItem">
-              <div
-                className="sidebar-item"
-                onClick={() => item.drop && toggle(index)}
-              >
-                <div>
-                  <span className="icon">{item.icon}</span> {item.title}
-                </div>
-                <div className="dropIcon">
-                {opened === index ? (
-                    <FontAwesomeIcon id="arrowDown" icon={faSortDown} />
-                  ) : (
-                    <FontAwesomeIcon id="arrow" icon={faSortDown} />
-                  )}
-                </div>
-              </div>
-              {item.drop && opened === index && (
-                <div className="dropdown">
-                  {item.drop.map((dropItem, dropIndex) => (
-                    <Link key={dropIndex} to={dropItem.path}><li key={dropIndex}>{dropItem.title}</li></Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </ul>
       </div>
     </div>
   );

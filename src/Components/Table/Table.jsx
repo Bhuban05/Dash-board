@@ -1,16 +1,22 @@
 import "./Table.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { LuChevronsUpDown } from "react-icons/lu";
 
 const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
-  const [search, setSearch] = useState(""); // Filtering useState
+  const [search, setSearch] = useState(""); 
 
-  const [currentPage, setCurrentPage] = useState(1); // Pagination useState
+  const [currentPage, setCurrentPage] = useState(1); 
 
-  const [daata, setDaata] = useState([...data]); // Sorting useState
+  const [daata, setDaata] = useState([...data]); 
   const [sortField, setSortField] = useState(null);
   const [direction, setDirection] = useState("asc");
+  const [loading, setLoading] = useState(true);
+  const [apiData, setApiData] = useState([]);
 
-  // filtering logic
+  const tableData = apiData.length > 0 ? apiData : daata;
+
+
+ 
   let filterData = [];
   try {
     if (!Array.isArray(data)) throw new Error("Invalid data format. Expected an array.");
@@ -22,26 +28,23 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
     filterData = daata.filter((datas) => {
       const name = datas?.Name?.toLowerCase() || "";
       const course = datas?.Course?.toLowerCase() || "";
-      const product = datas?.Product?.toLowerCase() || "";
-      return name.includes(search.toLowerCase()) || course.includes(search.toLowerCase()) || product.includes(search.toLowerCase());
+      return name.includes(search.toLowerCase()) || course.includes(search.toLowerCase());
     });
   } catch (error) {
     console.error("Error filtering data:", error);
     filterData = [];
   }
 
-  // pagination logic
   const totalPages = Math.ceil(filterData.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const paginatedData = filterData.slice(startIndex, startIndex + rowsPerPage);
 
-  // sorting function
+
   const handleSort = (field) => {
     let newDirection = "asc";
     if (sortField === field && direction === "asc") {
       newDirection = "desc";
     }
-
     const sortedData = [...daata].sort((a, b) => {
       if (a[field] < b[field]) return newDirection === "asc" ? -1 : 1;
       if (a[field] > b[field]) return newDirection === "asc" ? 1 : -1;
@@ -56,7 +59,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
   return (
     <div id="container-table">
       <div id="filter">
-        <label className="mr-0.5" id="filter-search">Search </label>
+        <label className="mr-0.5" id="filter-search">Search: </label>
         <input
           type="text"
           className="border-2 rounded-md"
@@ -79,7 +82,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
                 <tr>
                   {columns.map((col) => (
                     <th key={col} onClick={() => handleSort(col)} style={{ cursor: "pointer" }}>
-                      {col} {sortField === col ? (direction === "asc" ? "🔼" : "🔽") : ""}
+                      {col} {sortField === col ? (direction === "asc" ? <span id="Table-icon"><LuChevronsUpDown /></span>: <span id="Table-icon"><LuChevronsUpDown /></span>) : ""}
                     </th>
                   ))}
                 </tr>
@@ -88,7 +91,7 @@ const Table = ({ columns = [], data = [], rowsPerPage = 5 }) => {
                 {paginatedData.map((row, index) => (
                   <tr key={index}>
                     {columns.map((col) => (
-                      <td key={col}>{row[col] ?? "N/A"}</td>
+                      <td id="Table-data" key={col}>{row[col] ?? "N/A"}</td>
                     ))}
                   </tr>
                 ))}

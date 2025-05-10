@@ -2,12 +2,11 @@ import axios from "axios";
 
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.0.104:8282/api/v1", 
+  baseURL: "http://192.168.0.120:8081/college-hub-service/api/v1", 
   headers: {
     "Content-Type": "application/json",
-  },
+  },                
 });
-
 
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -45,7 +44,7 @@ axiosInstance.interceptors.response.use(
         console.error("Refresh token failed. Redirecting to login...");
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
-         window.location.href = "/login"; 
+        window.location.href = "/login"; 
       }
     }
 

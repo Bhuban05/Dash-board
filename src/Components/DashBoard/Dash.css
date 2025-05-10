@@ -1,4 +1,36 @@
 #container {
-    display: fleex;
+    display: flex;
     flex-direction: column;
+    margin-top: 70px;
+}
+
+#Create-board{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 300px;
+}
+
+#Create-board h2{
+    font-size: 35px;
+    font-weight: 500;
+}
+
+#Create-board button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 30px;
+    background-color: rgba(33, 113, 253, 0.795);
+    color: white;
+    border-radius: 10px 0 10px 0;
+    margin-right: 50px;
+    cursor: pointer;
+}
+
+@media (max-width: 950px){
+    #Create-board{
+        margin-left: 30px;
+    }
 }

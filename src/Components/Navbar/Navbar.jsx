@@ -10,6 +10,11 @@ import { motion } from "framer-motion";
 function Navbar() {
   const [open, setOpen] = useState(false);
   const [visibal, setVisibal] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setVisibal(true), 100);
+  }, []);
+
   const dropdownRef = useRef(null);
 
   const Menus = [
@@ -38,7 +43,7 @@ function Navbar() {
     <>
       <nav className="border-y-1 bg-gray-200 w-full top-0 fixed">
         <div className="flex items-center justify-between h-15">
-          <a className="items-center space-x-3 ms-8 text-3xl font-bold text-gray-600">phoenix</a>
+          <a to="/" className="items-center space-x-3 ms-8 text-3xl font-bold text-gray-600">phoenix</a>
 
           <input type="text" placeholder="  Search" className="border-1 h-8 rounded-2xl w-95 hidden sm:block" />
 
@@ -80,18 +85,19 @@ function Navbar() {
       </nav>
 
       <div
-        id="sideBar"
-        style={{
-          transform: visibal ? "translateX(0)" : "translateX(-100%)",
-          transition: "transform 0.5s ease-in-out",
-          position: "fixed",
-          left: 0,
-          top: 0,
-          height: "100vh",
-          width: "15%",
-        }}
+        className={`sidebar ${visibal ? "active" : ""}`}
+        // style={{
+        //   transform: visibal ? "translateX(0)" : "translateX(-100%)",
+        //   transition: "transform 0.5s ease-in-out",
+        //   position: "fixed",
+        //   left: 0,
+        //   top: 0,
+        //   height: "100vh",
+        //   width: "15%",
+        //   willChange: "transform",
+        // }}
       >
-        {visibal && <Sidebar />}
+        <Sidebar />
       </div>
     </>
   );

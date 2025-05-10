@@ -8,6 +8,13 @@ const API_ENDPOINTS = {
   RESETPASSWORD: `/auth/reset-password`, 
   COLLEGE: `/college/get-all`, 
   BOARD: `/board`, 
+  TYPES: `board/types`,
+  GETALL: `/college/get-all`,
+  DISTRICTS: `/location/district/{provinceId}`,
+  PROVINCES: `/location/province`,
+  MUNICIPALIATY: `/location/municipality/{municiplityId}`,
+  WARD: `/location/ward/{municipalityId}`
+
   
 }
 
